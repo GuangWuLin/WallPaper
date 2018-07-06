@@ -1,0 +1,3 @@
+export const SET_PRO_CATEGORY = 'SET_PRO_CATEGORY'
+
+export const SET_PRO_CENTER = 'SET_PRO_CENTER'
