@@ -47,6 +47,10 @@
             <Icon type="fireball"></Icon>
             招商加盟
             </MenuItem>
+            <MenuItem name="about">
+            <Icon type="ios-people"></Icon>
+            关于我们
+            </MenuItem>
             <MenuItem name="contact">
             <Icon type="ios-telephone"></Icon>
             联系我们

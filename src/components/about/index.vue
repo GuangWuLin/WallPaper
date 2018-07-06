@@ -6,33 +6,25 @@
                 <span>我们倾听客户需求，以最前沿的设计理念，赋予全新的形象</span>
             </div>
         </div>
-        <div style="background:#fff;">
-            <Tabs value="name1">
-                <TabPane label="公司简介" name="name1">
-                    <introduction></introduction>
-                </TabPane>
-                <TabPane label="资质荣誉" name="name3">
-                    <culture></culture>
-                </TabPane>
-            </Tabs>
+        <div class="router_view">
+            <RadioGroup v-model="about_us" @on-change='radioChange'>
+                <Radio label="公司简介"></Radio>
+                <Radio label="资质荣誉"></Radio>
+            </RadioGroup>
+            <router-view></router-view>
         </div>
-        <div class="footer-info">
-            <footers :footers='footers'></footers>
-        </div>
+        <footers :footers='footers'></footers>
     </section>
 </template>
 <script>
 import Footers from 'components/home/footer'
-import Introduction from 'components/about/introduction'
-import Culture from 'components/about/culture'
 export default {
     components: {
-        Footers,
-        Introduction,
-        Culture
+        Footers
     },
     data() {
         return {
+            about_us: '',
             footers: [
                 {
                     title: '专注',
@@ -69,6 +61,11 @@ export default {
             }, {
                 describle: '升华'
             }]
+        }
+    },
+    methods: {
+        radioChange() {
+
         }
     }
 }
@@ -108,6 +105,14 @@ export default {
             span:last-child {
                 font-size: 20px; // font-weight: bold;
             }
+        }
+    }
+    .router_view {
+        background: #fff;
+        &::after {
+            content: '';
+            display: inline;
+            clear: both;
         }
     }
 }

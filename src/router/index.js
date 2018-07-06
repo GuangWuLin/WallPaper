@@ -14,6 +14,17 @@ const About = resolve => {
     resolve(module);
   })
 }
+// 公司简介
+const Abstract = resolve => {
+  import('components/about/introduction').then(module => {
+    resolve(module);
+  })
+}
+const Honor = resolve => {
+  import('components/about/honor').then(module => {
+    resolve(module);
+  })
+}
 // 产品中心
 const Product = resolve => {
   import('view/product/index').then(module => {
@@ -69,7 +80,19 @@ const router = new Router({
     {
       path:'/about',
       name:'about',
-      component:About
+      component:About,
+      children:[
+        {
+          path:'/about/abstract',
+          name:'abstract',
+          component:Abstract
+        },
+        {
+           path:'/about/honor',
+          name:'honor',
+          component:Honor
+        }
+      ]
     },
     {
       path:'/product',

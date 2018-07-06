@@ -1,10 +1,10 @@
 <template>
     <p class="main-intro">
         <Row :gutter='16' class="who">
-            <Col span='12' :xs="2" :sm="4" :md="6" :lg="8">
+            <Col span='12'>
             <img src="../../../static/img/who-img.jpg" style="width:100%;height:100%;" alt="">
             </Col>
-            <Col span='12' :xs="2" :sm="4" :md="6" :lg="8">
+            <Col span='12'>
             <div class="who-describle">
                 <span>Who We Are</span>
                 <p>
