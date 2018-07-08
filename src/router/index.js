@@ -43,6 +43,11 @@ const News = resolve => {
     resolve(module);
   })
 }
+const NewsDetail = resolve => {
+  import('view/news/detail').then(module => {
+    resolve(module);
+  })
+}
 // 工程业绩/、
 const Project = resolve => {
   import('view/project/index').then(module => {
@@ -81,6 +86,7 @@ const router = new Router({
       path:'/about',
       name:'about',
       component:About,
+      redirect: { name: 'abstract' },
       children:[
         {
           path:'/about/abstract',
@@ -107,7 +113,14 @@ const router = new Router({
     {
       path:'/news',
       name:'news',
-      component: News
+      component: News,
+      children:[
+        {
+          path:'/news/detail',
+          name:'newsDetail',
+          component: NewsDetail,
+        }
+      ]
     },
     {
       path:'/project',

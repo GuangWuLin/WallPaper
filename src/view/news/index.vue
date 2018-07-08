@@ -1,7 +1,7 @@
 <template>
     <section>
         <single-bg></single-bg>
-        <list></list>
+        <list @toDetail='toDetail'></list>
     </section>
 </template>
 <script>
@@ -11,6 +11,16 @@ export default {
     components: {
         SingleBg,
         List
+    },
+    methods: {
+        toDetail(item) {
+            this.$router.push({
+                name: 'newsDetail',
+                params: {
+                    param: item
+                }
+            })
+        }
     }
 }
 </script>
