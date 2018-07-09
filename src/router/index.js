@@ -159,6 +159,12 @@ const router = new Router({
       name:'shop',
       component: Shop
     },
+    // 专卖店详情
+    {
+      path:'/shop/detail',
+      name:'shopDetail',
+      component: Detail,
+    },
     // 招商加盟
     {
       path:'/join',

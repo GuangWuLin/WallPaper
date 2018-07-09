@@ -1,10 +1,18 @@
 <template>
     <section class="footer-info">
         <div class="footer-block">
-            <span class="info-block">关于我们</span>
-            <span class="info-block">意见反馈</span>
-            <span class="info-block">隐私策略</span>
-            <span class="info-block">帮助中心</span>
+            <router-link to='/about'>
+                <span class="info-block">关于我们</span>
+            </router-link>
+            <router-link to='/contact'>
+                <span class="info-block">联系我们</span>
+            </router-link>
+            <router-link to='/join'>
+                <span class="info-block">招商加盟</span>
+            </router-link>
+            <router-link to='/news'>
+                <span class="info-block">最新资讯</span>
+            </router-link>
         </div>
         <div class="foot-bottom">
             <span>地址：四川省遂宁市射洪县</span>
@@ -21,9 +29,13 @@
         height: 50px;
         line-height: 50px;
         padding: 20px auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
         cursor: pointer;
         .info-block {
             color: #fff;
+            margin-left: 5px;
             &::after {
                 content: '|';
                 display: inline-block;

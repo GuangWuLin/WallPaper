@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         radioChange() {
-
+            this.getAllPictures();
         },
         getAllPictures() {
             this.$http.get('api/getKnowledges').then(res => {
@@ -38,7 +38,6 @@ export default {
                                 id: item.id
                             }
                         })
-                        console.log(this.knowledges)
                     }
                 } else {
                     this.$Message.warning('当前区域工程业绩查询失败,原因: ' + msg);
@@ -46,7 +45,6 @@ export default {
             })
         },
         currentClicked(item) {
-            console.log(item)
             this.$router.push({
                 name: 'kownledgeDetail',
                 params: {

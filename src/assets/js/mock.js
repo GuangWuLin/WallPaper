@@ -71,3 +71,12 @@ Mock.mock(/api\/getKnowledges/, {
     {"title":"@cname" ,"img":'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3133337892,2886046925&fm=173&app=25&f=JPEG?w=640&h=360&s=C4DA33C2484AAB599C58BD1E0100C0C0',"id|1-100":1 }
   ]
 });
+
+// 专卖店形象
+Mock.mock(/api\/getShopImage/, {
+  success: true,
+  msg: '',
+  'data|10':[
+    {"title":"@cname" ,"img":'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3133337892,2886046925&fm=173&app=25&f=JPEG?w=640&h=360&s=C4DA33C2484AAB599C58BD1E0100C0C0',"id|1-100":1 }
+  ]
+});
