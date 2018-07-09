@@ -1,10 +1,6 @@
 <template>
     <section class="exhibition">
-        <ul>
-            <li v-for="(item,index) in exhibitions" :key="index">
-                <div class="hvr-bounce-to-right exhition-bg" :href='item.title'></div>
-            </li>
-        </ul>
+        <div class="hvr-bounce-to-right exhition-bg" v-for="(item,index) in exhibitions" v-lazy:background-image='item.img' :key="index" :href='item.title'></div>
     </section>
 </template>
 <script>
@@ -21,29 +17,16 @@ export default {
 <style lang="less" scoped>
 .exhibition {
     width: 100%;
+    height: 200px;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: row nowrap;
     &::-webkit-scrollbar {
         display: none;
     }
-    ul {
-        width: 200%;
-        overflow: scroll;
-        list-style: none;
-        position: relative;
-        &::after {
-            content: '';
-            display: inline;
-            clear: both;
-        }
-        li {
-            float: left;
-            margin: 10px;
-            .exhition-bg {
-                width: 200px;
-                height: 200px;
-                background: url(../assets/img/img1.jpg);
-            }
-        }
+    .exhition-bg {
+        flex: 0 0 18%;
+        margin: 10px;
     }
 }
 

@@ -1,13 +1,13 @@
 <template>
+    <!-- 图片与文章 -->
     <div v-html='richText'>
-
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            richText: '<h1>FuckYou!!</h1>'
+            richText: '<h1>HelloKitty!!</h1>'
         }
     }
 }

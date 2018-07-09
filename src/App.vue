@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <Layout>
-      <Header :breakpoint='breakpoint'>
+      <Header>
         <nav1></nav1>
       </Header>
       <Content breakpoint='md'>
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </Content>
       <Footer class="layout-footer-center" breakpoint='md'>
         <tail></tail>
@@ -25,28 +27,14 @@ export default {
   },
   data() {
     return {
-      breakpoint: 'xl',
-      timer: null
+
     }
   },
   methods: {
-    compare(width) {
-      if (width >= 1200) {
-        this.breakpoint = 'xl';
-      } else if (width > 992 && width <= 1200) {
-        this.breakpoint = 'lg';
-      } else if (width > 768 && width <= 992) {
-        this.breakpoint = 'md';
-      } else if (width > 480 && width <= 768) {
-        this.breakpoint = 'sm';
-      } else {
-        this.breakpoint = 'xs';
-      }
-    }
+
   },
   mounted() {
-    this.compare(document.body.clientWidth);
-    console.log(this.breakpoint)
+
   }
 }
 </script>
@@ -75,6 +63,10 @@ export default {
     text-align: center;
     background: transparent;
     padding: 0;
+  }
+  .ivu-radio-wrapper {
+    font-size: 14px;
+    color: #fff;
   }
 }
 

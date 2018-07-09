@@ -1,9 +1,9 @@
 <template>
     <section class="pic-container">
-        <div v-for="(item,index) in imgData" :key="index" class="pic-item">
+        <div v-for="(item,index) in pictures" :key="index" class="pic-item" @click='currentClicked(item)'>
             <div class="pic">
-                <a href="javascrip:;"><img :src="item.img" alt=""></a>
-                <a href="javascrip:;">{{item.describle}}</a>
+                <a href="javascrip:;"><img v-lazy="item.img" alt=""></a>
+                <a href="javascrip:;">{{item.title}}</a>
             </div>
         </div>
     </section>
@@ -13,18 +13,17 @@
     width: 100%;
     background: #fff;
     padding: 0 20px;
-    margin: 10px; // display: flex;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
     .pic-item {
         width: 200px;
         height: 200px;
-        float: left;
         margin: 10px;
-        position: relative;
         .pic {
             overflow: hidden;
             position: relative;
             height: 100%;
-
             a:first-child {
                 display: inline-block;
                 width: 100%;
@@ -58,118 +57,22 @@
             }
         }
     }
-    &::after {
-        content: '';
-        display: inline;
-        clear: both;
-    }
 }
 </style>
 
 <script>
 import global from 'assets/js/global'
 export default {
+    props: ['pictures'],
     data() {
         return {
-            imgData: [{
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            },
-            {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            },
-            {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            },
-            {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            },
-            {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            },
-            {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }, {
-                img: global.img1,
-                describle: 'HelloKitty'
-            }]
+
+        }
+    },
+    methods: {
+        // 选中某一个图片
+        currentClicked(item) {
+            this.$emit('currentClicked', item);
         }
     }
 }

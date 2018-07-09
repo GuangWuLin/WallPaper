@@ -1,15 +1,20 @@
 <template>
-    <arts>
-    </arts>
+    <div class="segment-container">
+        <segment>
+        </segment>
+    </div>
 </template>
 <script>
-import Arts from 'base/article'
+import Segment from 'base/segment'
 export default {
     components: {
-        Arts
+        Segment
     }
 }
 </script>
 <style lang="less" scoped>
-
+.segment-container {
+    width: 100%;
+    min-height: 800px;
+}
 </style>

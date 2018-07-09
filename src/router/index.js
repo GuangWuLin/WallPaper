@@ -43,7 +43,7 @@ const News = resolve => {
     resolve(module);
   })
 }
-const NewsDetail = resolve => {
+const Detail = resolve => {
   import('view/news/detail').then(module => {
     resolve(module);
   })
@@ -79,9 +79,14 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'hello',
+      name: 'home',
       component: Home
     },
+    {
+      path: '/home',
+      redirect: { name: 'home' },
+    },
+    // 关于我们
     {
       path:'/about',
       name:'about',
@@ -100,43 +105,61 @@ const router = new Router({
         }
       ]
     },
+    // 产品中心
     {
-      path:'/product',
+      path:'/product/:id',
       name:'product',
       component:Product,
     },
+    // 联系我们
     {
       path:'/contact',
       name:'contact',
       component:Contact
     },
+    // 新闻
     {
       path:'/news',
       name:'news',
-      component: News,
-      children:[
-        {
-          path:'/news/detail',
-          name:'newsDetail',
-          component: NewsDetail,
-        }
-      ]
+      component: News
     },
+    // 新闻详情
     {
-      path:'/project',
+      path:'/news/detail',
+      name:'newsDetail',
+      component: Detail,
+    },
+    // 工程业绩
+    {
+      path:'/project/:id',
       name:'project',
       component: Project
     },
+     // 工程业绩详情
+    {
+      path:'/project/detail',
+      name:'projectDetail',
+      component: Detail,
+    },
+    // 知识园地
     {
       path:'/kownledge',
       name:'kownledge',
       component: Kownledge
     },
+     // 知识园地详情
+    {
+      path:'/kownledge/detail',
+      name:'kownledgeDetail',
+      component: Detail,
+    },
+    // 专卖店
     {
       path:'/shop',
       name:'shop',
       component: Shop
     },
+    // 招商加盟
     {
       path:'/join',
       name:'join',

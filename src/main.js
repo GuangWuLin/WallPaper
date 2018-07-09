@@ -8,7 +8,11 @@ import 'iview/dist/styles/iview.css';
 import 'animate.css';
 import "../static/css/hover.css";
 import http from './utils/axios'
+import VueLazyload from 'vue-lazyload'
 Vue.use(http)
+Vue.use(VueLazyload, {
+  loading: require('assets/img/img5.jpg')
+})
 Vue.prototype.$http = http;
 Vue.config.productionTip = false;
 require('./assets/js/mock.js');

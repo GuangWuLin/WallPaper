@@ -16,7 +16,7 @@
                     工程业绩
                 </template>
                 <MenuGroup title="区域">
-                    <MenuItem :name="item.name" v-for="(item,index) in achievements" :key="index">{{item.title}}</MenuItem>
+                    <MenuItem :name="item.name" v-for="(item,index) in projects" :key="index">{{item.label}}</MenuItem>
                 </MenuGroup>
             </Submenu>
             <Submenu name="product">
@@ -24,8 +24,8 @@
                     <Icon type="stats-bars"></Icon>
                     产品中心
                 </template>
-                <MenuGroup title="使用">
-                    <MenuItem :name="item.name" v-for="(item,index) in productCenter" :key="index">{{item.title}}</MenuItem>
+                <MenuGroup title="类别">
+                    <MenuItem :name="item.name" v-for="(item,index) in productCenter" :key="index">{{item.label}}</MenuItem>
                 </MenuGroup>
             </Submenu>
             <Submenu name="about">
@@ -59,38 +59,29 @@
     </Affix>
 </template>
 <script>
-import { productCate } from 'assets/js/mixin'
+import { Navs } from 'assets/js/mixin'
 export default {
-    mixins: [productCate],
+    mixins: [Navs],
     data() {
         return {
             theme: 'primary',
-            achievements: [
-                {
-                    title: '四川',
-                    name: 'project/sc'
-                },
-                {
-                    title: '重庆',
-                    name: 'projcet/cq'
-                }
-            ]
+            // projects: []
         }
     },
     methods: {
-        testGet() {
-            let productCenter = [];
-            this.$http.get('api/GetInfo').then(res => {
+        // 获取产品中心二级菜单
+        getProducts() {
+            this.$http.get('api/getProducts').then(res => {
                 let { success, data, msg } = res;
                 if (success) {
                     if (data.length) {
-                        data.forEach(item => {
-                            productCenter.push({
-                                name: `${item.category}/${item.name}`,
-                                title: item.title,
-                                value: item.name
-                            });
-                        });
+                        let productCenter = data.map(item => {
+                            return {
+                                label: item.label,
+                                name: `${item.name}/${item.value}`,
+                                value: item.value
+                            }
+                        })
                         this.SET_PRO_CENTER(productCenter);
                     } else {
                         this.$Message.warning('产品分类暂无数据');
@@ -100,31 +91,51 @@ export default {
                 }
             })
         },
+        // 跳转路由
         enterPro(item) {
-            if (item === 'home') {
+            let arr = item.split('/');
+            if (arr.length === 1) {
                 this.$router.push({
-                    path: '/'
+                    path: `/${item}`
                 });
             } else {
-                let arr = item.split('/');
-                if (arr.length === 1) {
-                    this.$router.push({
-                        path: `/${item}`
-                    });
-                } else {
-                    this.$router.push({
-                        path: `/${arr[0]}`,
-                        query: {
-                            category: `${arr[1]}`
-                        }
-                    });
-                    this.SET_PRO_CATEGORY(arr[1]);
+                if (arr[0] === 'product') {
+                    this.SET_CURRENT_PRODUCT(arr[1]);
+                } else if (arr[0] === 'project') {
+                    this.SET_CURRENT_PROJECT(arr[1]);
                 }
+                this.$router.push({
+                    name: arr[0],
+                    params: {
+                        id: arr[1]
+                    }
+                })
             }
+        },
+        // 获取工程业绩的耳机菜单
+        getProjects() {
+            this.$http.get('api/getProjects').then(res => {
+                let { success, data, msg } = res;
+                if (success) {
+                    if (data.length) {
+                        let projects = data.map(item => {
+                            return {
+                                label: item.label,
+                                value: item.value,
+                                name: `${item.name}/${item.value}`
+                            }
+                        })
+                        this.SET_PROJECTS(projects);
+                    }
+                } else {
+                    this.$Message.warning('获取工程业绩菜单失败');
+                }
+            })
         }
     },
     mounted() {
-        this.testGet();
+        this.getProducts();
+        this.getProjects()
     }
 }
 </script>

@@ -10,7 +10,7 @@
         </Carousel>
         <!-- 块级介绍 -->
         <ul class="block-ul">
-            <li class="tag" v-for="(item,index) in blocks" :key="index">
+            <li class="tag" v-for="(item,index) in professional" :key="index">
                 <img :src="item.img" alt="">
                 <div class="tag-information">
                     <h2>{{item.title}}</h2>
@@ -41,11 +41,11 @@
                 </Col>
             </Row>
         </div>
-        <!-- 轮播图 -->
+        <!-- 成功案例 -->
         <div class="case-exhibition">
             <span class="title">我们的成功案例</span>
             <h3>始终以专业的设计视角和前沿的开发技术为基础</h3>
-            <block-show :exhibitions='blocks'></block-show>
+            <block-show :exhibitions='successCase'></block-show>
         </div>
 
         <listen-require :standards='standards'></listen-require>
@@ -66,24 +66,34 @@ export default {
             right_arrow: global.right_arrow,
             carousels: [global.img1, global.img2, global.img3, global.img4, global.img5],
             standards: ['技术创新', '团队协作', '品质坚持'],
-            blocks: [],
+            professional: [],// 四个专业介绍
+            successCase: [],//成功案例
             blockInfo: []
         }
     },
     methods: {
-        getBlockInfo() {
-            this.blocks = [];
-            this.$http.get('api/GetCircleInfo').then(res => {
+        // 成功案例
+        getSuccessCase() {
+            this.successCase = [];
+            this.$http.get('api/getSuccessCase').then(res => {
                 let { success, data, msg } = res;
                 if (success) {
                     if (data.length) {
-                        data.forEach(item => {
-                            this.blocks.push({
+                        // data.forEach(item => {
+                        //     this.successCase.push({
+                        //         title: item.title,
+                        //         describe: item.describe,
+                        //         img: item.img
+                        //     })
+                        // })
+                        this.successCase = data.map(item => {
+                            return {
                                 title: item.title,
                                 describe: item.describe,
                                 img: item.img
-                            })
+                            }
                         })
+                        console.log(this.successCase)
                     } else {
                         this.$Message.warning('工程进度分类暂无数据');
                     }
@@ -92,17 +102,19 @@ export default {
                 }
             })
         },
-        getBlock() {
-            this.blocks = [];
-            this.$http.get('api/GetBlock').then(res => {
+        // 四个专业介绍
+        getProfessional() {
+            this.professional = [];
+            this.$http.get('api/getProfessional').then(res => {
                 let { success, data, msg } = res;
                 if (success) {
                     if (data.length) {
-                        this.blocks = data;
+                        this.professional = data;
                     }
                 }
             })
         },
+
         getBlockDescribe() {
             this.$http.get('api/GetBlockInfo').then(res => {
 
@@ -110,8 +122,8 @@ export default {
         }
     },
     mounted() {
-        this.getBlockInfo();
-        this.getBlockDescribe();
+        this.getProfessional();
+        this.getSuccessCase();
     }
 }
 </script>

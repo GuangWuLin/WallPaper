@@ -3,10 +3,10 @@
         <single-bg></single-bg>
         <div class="pro-select">
             <RadioGroup v-model="pro_value" @on-change='radioChange'>
-                <Radio :label="item.title" v-for="(item,index) in productCenter" :value='item.value' :key="index"></Radio>
+                <Radio :label="item.label" v-for="(item,index) in productCenter" :value='item.value' :key="index"></Radio>
             </RadioGroup>
             <!-- 图片列表 -->
-            <pro-show></pro-show>
+            <pro-show :pictures='currentProducts'></pro-show>
         </div>
     </section>
 </template>
@@ -18,11 +18,11 @@
 </style>
 
 <script>
-import { productCate } from 'assets/js/mixin'
+import { Navs } from 'assets/js/mixin'
 import SingleBg from 'base/singleBg'
-import ProShow from 'base/picture'
+import ProShow from 'components/product/picture'
 export default {
-    mixins: [productCate],
+    mixins: [Navs],
     components: {
         SingleBg,
         ProShow
@@ -30,20 +30,43 @@ export default {
     data() {
         return {
             pro_value: '',
+            currentProducts: []
         }
     },
     watch: {
-        productCategory(val) {
-            let tmp = this.productCenter.filter(item => item.value == val);
-            this.pro_value = tmp[0].title;
+        currentProduct(val) {
+            let current = this.productCenter.find(item => item.value === val);
+            this.pro_value = current.label;
         }
     },
     methods: {
+        getAllPictures() {
+            this.$http.get('api/getAllProducts').then(res => {
+                let { success, msg, data } = res;
+                if (success) {
+                    if (data.length) {
+                        this.currentProducts = data.map(item => {
+                            return {
+                                title: item.title,
+                                img: item.img
+                            }
+                        })
+                    }
+                } else {
+                    this.$Message.warning('当前分类产品查询失败,原因: ' + msg);
+                }
+            })
+        },
+        // 改变选项
         radioChange(val) {
             console.log(val);
+            let tmp = this.productCenter.find(item => item.label == val);
+            // console.error(tmp);
+            this.getAllPictures();
         }
     },
-    mounted() {
+    activated() {
+        this.getAllPictures();
     }
 }
 </script>
