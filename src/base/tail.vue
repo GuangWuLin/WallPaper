@@ -1,17 +1,17 @@
 <template>
     <section class="footer-info">
         <div class="footer-block">
-            <router-link to='/about'>
-                <span class="info-block">关于我们</span>
+            <router-link class="info-block" to='/about'>
+                <span>关于我们</span>
             </router-link>
-            <router-link to='/contact'>
-                <span class="info-block">联系我们</span>
+            <router-link class="info-block" to='/contact'>
+                <span>联系我们</span>
             </router-link>
-            <router-link to='/join'>
-                <span class="info-block">招商加盟</span>
+            <router-link class="info-block" to='/join'>
+                <span>招商加盟</span>
             </router-link>
-            <router-link to='/news'>
-                <span class="info-block">最新资讯</span>
+            <router-link class="info-block" to='/news'>
+                <span>最新资讯</span>
             </router-link>
         </div>
         <div class="foot-bottom">
@@ -51,7 +51,7 @@
     }
     .foot-bottom:hover {
         filter: brightness(1.8);
-        color: #00c1cf;
+        color: #f1fdd1;
     }
 }
 </style>

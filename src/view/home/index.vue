@@ -1,6 +1,9 @@
 <template>
     <section class="wrap">
         <contents></contents>
+        <Modal v-model="formShow" title="填写信息" @on-ok='asyncOK' @on-cancel='cancel'>
+            <user-form ref='userForm' @invalidate='invalidate'></user-form>
+        </Modal>
         <footers :footers='footers'></footers>
     </section>
 </template>
@@ -13,14 +16,16 @@
 <script>
 import Contents from 'components/home/content'
 import Footers from 'components/home/footer'
-
+import UserForm from 'base/userForm'
 export default {
     components: {
         Contents,
+        UserForm,
         Footers
     },
     data() {
         return {
+            formShow: true,
             footers: [
                 {
                     title: '客户提出需求',
@@ -62,7 +67,23 @@ export default {
         }
     },
     methods: {
-
+        asyncOK() {
+            const child = this.$refs.userForm;
+            if (!child.formValidate.name || !child.formValidate.phone) {
+                this.$Message.warning('请填写完信息再提交哟');
+                this.invalidate();
+                return
+            }
+            this.$refs.userForm.handleSubmit();
+        },
+        cancel() {
+            this.$refs.userForm.handleReset();
+        },
+        invalidate() {
+            setTimeout(_ => {
+                this.formShow = true;
+            }, 500);
+        }
     }
 }
 </script>

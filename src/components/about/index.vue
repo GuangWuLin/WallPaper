@@ -24,7 +24,7 @@ export default {
     },
     data() {
         return {
-            about_us: '',
+            about_us: '公司简介',
             footers: [
                 {
                     title: '专注',
@@ -44,23 +44,7 @@ export default {
                     type: 'flag',
                     size: 'about'
                 }
-            ],
-            pro: [{
-                describle: '开创品牌',
-                type: 'trophy'
-            },
-            {
-                describle: '发展'
-            },
-            {
-                describle: '进击'
-            }, {
-                describle: '拓宽'
-            }, {
-                describle: '延展'
-            }, {
-                describle: '升华'
-            }]
+            ]
         }
     },
     methods: {
@@ -108,7 +92,8 @@ export default {
         }
     }
     .router_view {
-        background: #fff;
+        // background: #fff;
+        margin: 10px auto;
         &::after {
             content: '';
             display: inline;
