@@ -1,13 +1,14 @@
 <template>
     <!-- 列表显示 -->
     <section class="list-container">
+        <!-- 单个 cell 的列表 -->
         <div class="list-card" v-for='(item,index) in listData' :key="index" @click="toDetail(item)">
-            <img src="../../static/img/32.jpeg" width="100" height="100" alt="">
+            <!-- 左侧图片 -->
+            <img src="../../static/img/32.jpeg" alt="">
+            <!-- 右侧描述 -->
             <div class="list-card-right">
-                <div>
-                    <h3>{{item.title}}</h3>
-                    <span>{{item.date}}</span>
-                </div>
+                <span class="list-title">{{item.title}}</span>
+                <span class="list-sub-title">{{item.date}}</span>
                 <p>
                     {{item.describe}}
                 </p>
@@ -16,32 +17,45 @@
     </section>
 </template>
 <style lang="less" scoped>
+@media screen and (min-width:768px) {
+    .list-container {
+        margin-bottom: 100px;
+    }
+}
+
 .list-container {
-    display: flex;
-    flex-direction: column; // min-height: 800px;
     .list-card {
-        padding: 10px 20px;
         margin: 10px 20px;
+        height: 200px;
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         border: 1px solid rgba(0, 180, 220, 0.5);
-        height: 120px;
-
         img {
+            // flex: 1;
+            width: 200px;
+            height: 200px;
             perspective: 1px;
             transition: all 1s;
             display: inline-block;
         }
         .list-card-right {
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             margin-left: 10px;
             text-align: left;
-            flex: 1;
-            span {
-                display: inline-block;
-                margin: 10px auto;
+            .list-title,
+            .list-sub-title {
+                margin: 10px;
+            }
+            .list-title {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .list-sub-title {
+                font-size: 14px;
             }
             p {
                 word-break: break-all;

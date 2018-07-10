@@ -9,6 +9,7 @@ import 'animate.css';
 import "../static/css/hover.css";
 import http from './utils/axios'
 import VueLazyload from 'vue-lazyload'
+import 'lib-flexible';
 Vue.use(http)
 Vue.use(VueLazyload, {
   loading: require('assets/img/img5.jpg')

@@ -1,9 +1,13 @@
 <template>
-    <section>
+    <section class="project-content">
         <single-bg></single-bg>
         <div class="pro-select">
             <RadioGroup v-model="project_area" @on-change='radioChange'>
-                <Radio :label="item.label" v-for="(item,index) in projects" :value='item.value' :key="index"></Radio>
+                <Radio :label="item.label" v-for="(item,index) in projects" :value='item.value' :key="index">
+                    <span class="pro-span">
+                        {{item.label}}
+                    </span>
+                </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
             <block-pic :pictures='currentProjects' @currentClicked='currentClicked'></block-pic>
@@ -76,9 +80,19 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@media screen and (min-width:768px) {
+    .project-content {
+        margin-bottom: 100px;
+    }
+}
+
+
 .pro-select {
     // display: flex;
     // justify-content: center;
     margin: 20px;
+    .pro-span {
+        font-size: 20px;
+    }
 }
 </style>

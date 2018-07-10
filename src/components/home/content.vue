@@ -4,7 +4,7 @@
         <Carousel autoplay v-model="value2" loop arrow='never'>
             <CarouselItem v-for="(item,index) in carousels" class="carousel" :key="index">
                 <div class="demo-carousel">
-                    <img :src="item" style="width:100%;" height="300" alt="">
+                    <img :src="item" alt="">
                 </div>
             </CarouselItem>
         </Carousel>
@@ -25,21 +25,19 @@
         </ul>
         <div class="text-image">
             <span class="title">xxxx专注于高品质的墙纸</span>
-            <Row :gutter="16" class="content-body">
+            <div class="content-body">
                 <!-- 图片展示  -->
-                <Col span="12">
-                <img class="animated bounceInLeft" style="height:300px;width:100%;" src="../../assets/img/img1.jpg" alt="">
-                </Col>
+                <div class="content-left">
+                    <img class="animated bounceInLeft" src="../../assets/img/img1.jpg" alt="">
+                </div>
                 <!-- 两列两横简介  -->
-                <Col span="12">
-                <div class="col-content" style="height:100%;width:100%;">
-                    <h2> 先进的设计理念</h2>
+                <div class="col-content">
+                    <span class="sub-title"> 先进的设计理念</span>
                     <p name='idea'>
                         利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布 我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布 我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布
                     </p>
                 </div>
-                </Col>
-            </Row>
+            </div>
         </div>
         <!-- 成功案例 -->
         <div class="case-exhibition">
@@ -47,7 +45,6 @@
             <h3>始终以专业的设计视角和前沿的开发技术为基础</h3>
             <block-show :exhibitions='successCase'></block-show>
         </div>
-
         <listen-require :standards='standards'></listen-require>
     </section>
 </template>
@@ -128,11 +125,140 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@media screen and (max-width:375px) {
+    .demo-carousel {
+        img {
+            height: 200px;
+            width: 100%;
+        }
+    }
+    .text-image {
+        .content-body {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            margin: 5px;
+            .content-left {
+                img {
+                    height: 200px;
+                    width: 100%;
+                }
+            }
+            .col-content {
+                margin: 10px;
+                overflow: hidden;
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                .sub-title {
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                p[name='idea'] {
+                    width: 100%;
+                    height: 100%;
+                    font-size: 12px;
+                    text-align: left;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 767px) {
+    .demo-carousel {
+        img {
+            height: 240px;
+            width: 100%;
+        }
+    }
+    .text-image {
+        .content-body {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            margin: 5px;
+            .content-left {
+                img {
+                    height: 200px;
+                    width: 100%;
+                }
+            }
+            .col-content {
+                margin: 10px;
+                overflow: hidden;
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                .sub-title {
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                p[name='idea'] {
+                    width: 100%;
+                    height: 100%;
+                    font-size: 12px;
+                    text-align: left;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .demo-carousel {
+        img {
+            height: 300px;
+            width: 100%;
+        }
+    }
+    .text-image {
+        .content-body {
+            // box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            .content-left {
+                flex: 1;
+                img {
+                    width: 100%;
+                    height: 300px;
+                }
+            }
+            .col-content {
+                margin: 10px;
+                overflow: hidden;
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                .sub-title {
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                p[name='idea'] {
+                    width: 100%;
+                    height: 100%;
+                    font-size: 12px;
+                    text-align: left;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
 .wrap-container {
-    position: relative; // padding: 10px 40px;
+    position: relative; // margin-top: 40px;
     .carousel {
-        width: 100%; // height: 300px;
-        // line-height: 300px;
+        width: 100%;
     }
     ul {
         list-style: none;
@@ -158,23 +284,6 @@ export default {
     }
     .text-image {
         padding: 10px 40px;
-        .content-body {
-            box-sizing: border-box;
-            width: 100%;
-            height: 300px;
-            .col-content {
-                margin: 20px;
-                margin: 10px 0;
-                h2 {
-                    text-align: center;
-                }
-                p[name='idea'] {
-                    font-size: 14px;
-                    line-height: 24px;
-                    text-align: left;
-                }
-            }
-        }
     }
 }
 </style>

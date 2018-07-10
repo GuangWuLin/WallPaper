@@ -3,7 +3,11 @@
         <single-bg></single-bg>
         <div class="pro-select">
             <RadioGroup v-model="pro_value" @on-change='radioChange'>
-                <Radio :label="item.label" v-for="(item,index) in productCenter" :value='item.value' :key="index"></Radio>
+                <Radio :label="item.label" v-for="(item,index) in productCenter" :value='item.value' :key="index">
+                    <span class="pro-span">
+                        {{item.label}}
+                    </span>
+                </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
             <pro-show :pictures='currentProducts'></pro-show>
@@ -14,6 +18,9 @@
 .pro-select {
     display: table;
     margin: 20px;
+    .pro-span {
+        font-size: 20px;
+    }
 }
 </style>
 

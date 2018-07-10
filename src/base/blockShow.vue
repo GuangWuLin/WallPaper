@@ -25,7 +25,9 @@ export default {
         display: none;
     }
     .exhition-bg {
-        flex: 0 0 18%;
+        // flex: 0 0 18%;
+        width: 200px;
+        height: 200px;
         margin: 10px;
     }
 }

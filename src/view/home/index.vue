@@ -4,7 +4,7 @@
         <Modal v-model="formShow" title="填写信息" @on-ok='asyncOK' @on-cancel='cancel'>
             <user-form ref='userForm' @invalidate='invalidate'></user-form>
         </Modal>
-        <footers :footers='footers'></footers>
+        <footers :footers='footers' :titleInfo='titleInfo'></footers>
     </section>
 </template>
 <style lang="less" scoped>
@@ -26,40 +26,33 @@ export default {
     data() {
         return {
             formShow: true,
+            titleInfo: {
+                title: '专业6步，步步为营',
+                subTitle: '把一件事做到极致，用工匠精神激励前行'
+            },
             footers: [
                 {
                     title: '客户提出需求',
-                    en: 'CUSTOMER REMAND',
                     type: 'chatbox-working',
                     size: 'home'
                 },
                 {
                     title: '制定设计方案',
-                    en: 'DESIGN PLAN',
                     type: 'document-text',
                     size: 'home'
                 },
                 {
                     title: '双方签订协议',
-                    en: 'SIGN AGREEMENT',
                     type: 'clipboard',
                     size: 'home'
                 },
                 {
-                    title: '设计及修改',
-                    en: 'DESIGN/MODIFY',
-                    type: 'edit',
-                    size: 'home'
-                },
-                {
                     title: '展示与验收',
-                    en: 'ACCEPTANCE TEST',
                     type: 'search',
                     size: 'home'
                 },
                 {
                     title: '后期维护',
-                    en: 'NAINTENANCE',
                     type: 'wrench',
                     size: 'home'
                 }

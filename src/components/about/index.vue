@@ -1,11 +1,13 @@
 <template>
     <section class="container">
+        <!-- 第一区-安图 -->
         <div class="about">
             <div class="modal">
                 <span>关于我们</span>
                 <span>我们倾听客户需求，以最前沿的设计理念，赋予全新的形象</span>
             </div>
         </div>
+        <!-- 第二区中间介绍 -->
         <div class="router_view">
             <RadioGroup v-model="about_us" @on-change='radioChange'>
                 <Radio label="公司简介"></Radio>
@@ -13,7 +15,8 @@
             </RadioGroup>
             <router-view></router-view>
         </div>
-        <footers :footers='footers'></footers>
+        <!-- 第三区 装逼 -->
+        <footers :footers='footers' :titleInfo='titleInfo'></footers>
     </section>
 </template>
 <script>
@@ -25,22 +28,23 @@ export default {
     data() {
         return {
             about_us: '公司简介',
+            titleInfo: {
+                title: '匠心独运',
+                subTitle: '用专业表达专业'
+            },
             footers: [
                 {
                     title: '专注',
-                    en: '专业服务9年，积累大量经验，始终相信只有专注才能成就杰出',
                     type: 'navigate',
                     size: 'about'
                 },
                 {
                     title: '创新',
-                    en: '融合创新理念和前沿技术，量身定制高品质的设计方案',
                     type: 'ios-lightbulb-outline',
                     size: 'about'
                 },
                 {
                     title: '品质',
-                    en: '无论是整体的解构还是局部的细节，都能感受到我们对品质的追求',
                     type: 'flag',
                     size: 'about'
                 }
@@ -57,7 +61,8 @@ export default {
 
 <style lang="less" scoped>
 .container {
-    // padding: 20px;
+    display: flex;
+    flex-direction: column;
     .about {
         width: 100%;
         background-image: url(../../../static/img/bg-slider-icons-bottom.jpg);
@@ -65,12 +70,9 @@ export default {
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: scroll;
-        background-position: 50% -30px; // filter: blur(5px);
-        // &::after {
-        //     content: '关于我门'
-        // }
+        background-position: 50% -30px;
         .modal {
-            margin: 0 auto; // line-height: 400px;
+            margin: 0 auto;
             background: rgba(0, 0, 0, .5);
             color: #fff;
             display: flex;
@@ -87,12 +89,11 @@ export default {
                 margin-bottom: 20px;
             }
             span:last-child {
-                font-size: 20px; // font-weight: bold;
+                font-size: 20px;
             }
         }
     }
     .router_view {
-        // background: #fff;
         margin: 10px auto;
         &::after {
             content: '';

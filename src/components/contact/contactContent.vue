@@ -1,22 +1,15 @@
 <template>
     <section class="main-container">
-        <Row :gutter='20'>
-            <Col span='12'>
-            <div class="contact-describle">
-                <span>墙纸十大品牌，无缝墙布，提花壁布，刺绣墙布</span>
-                <div>
-                    <span>地址：四川省遂宁市射洪县太和镇</span>
-                    <span>电话：13000000000</span>
-                    <span>座机：0825-6688888</span>
-                    <img src="../../../static/img/location.jpg" alt="">
-                </div>
-            </div>
-            </Col>
-            <Col span='12' style="height:400px;">
+        <div class="contact-describle">
+            <span>墙纸十大品牌，无缝墙布，提花壁布，刺绣墙布</span>
+            <span>地址：四川省遂宁市射洪县太和镇</span>
+            <span>电话：13000000000</span>
+            <span>座机：0825-6688888</span>
+            <img src="../../../static/img/location.jpg" alt="">
+        </div>
+        <div class="right-map">
             <div id="container"></div>
-            <div id="panel"></div>
-            </Col>
-        </Row>
+        </div>
     </section>
 </template>
 <script>
@@ -39,47 +32,6 @@ export default {
                 offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
                 content: "HelloKitty"
             });
-            AMap.plugin(['AMap.ToolBar', 'AMap.Driving'], function() {//异步加载插件
-                var toolbar = new AMap.ToolBar();
-                map.addControl(toolbar);
-                var driving = new AMap.Driving({
-                    policy: AMap.DrivingPolicy.LEAST_TIME
-                }); //构造驾车导航类
-                driving.search([{ keyword: '广都地铁站' }, { keyword: '射洪金龙市场' }], function(status, result) {
-                    if (status === 'complete' && result.info === 'OK') {
-                        (new Lib.AMap.DrivingRender()).autoRender({
-                            data: result,
-                            map: map,
-                            panel: "panel"
-                        });
-                    } else {
-                        alert(result);
-                    }
-                })
-            });
-
-            // AMapUI.loadUI(['overlay/SimpleInfoWindow'], function(SimpleInfoWindow) {
-            //     var infoWindow = new SimpleInfoWindow({
-            //         infoTitle: '<strong>点击这里</strong>',
-            //         infoBody: '<p class="my-desc">点击这里</p><button class="mybtn">点击这里</button>',
-            //         //基点指向marker的头部位置
-            //         // offset: new AMap.Pixel(0, 0)
-            //     });
-            //     infoWindow.get$Container().on('click', function(event) {
-            //         alert('Click infoWindow');
-            //     });
-            //     infoWindow.get$InfoTitle().on('click', function(event) {
-            //         //阻止冒泡
-            //         event.stopPropagation();
-            //         alert('Click infoTitle');
-            //     });
-            //     infoWindow.get$InfoBody().on('click', '.mybtn', function(event) {
-            //         //阻止冒泡
-            //         event.stopPropagation();
-            //         alert('Click .mybtn of infoBody');
-            //     });
-            //     infoWindow.open(map, map.getCenter());
-            // });
             map.add(marker);
 
         }
@@ -90,44 +42,80 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.main-container {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    margin: 10px auto;
-    #container {
-        width: 100%;
-        height: 100%;
-    }
-    #panel {
-        z-index: 999;
-        position: absolute;
-        background-color: white;
-        max-height: 100%;
-        overflow-y: auto;
-        right: 0;
-        width: 280px;
-    } // p.my-desc {
-    //     margin: 5px 0;
-    //     line-height: 150%;
-    // }
-    .contact-describle {
-        padding: 20px;
-        text-align: left;
-        &>span {
-            font-size: 30px;
-            font-weight: bold;
-        }
-        div {
-            margin-top: 20px;
+@media screen and (max-width:767px) {
+    .main-container {
+        width: 100%; // padding: 10px;
+        display: flex;
+        flex-direction: column;
+        .contact-describle {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
             span {
-                display: block;
                 font-size: 20px;
-                line-height: 30px;
+                line-height: 40px;
+                text-align: left;
+                margin: 8px;
+            }
+            span:nth-child(1) {
+                font-size: 30px;
+                font-weight: bold;
+                color: #006323;
+                text-align: center;
             }
             img {
                 width: 100%;
-                height: 30%;
+            }
+        }
+        .right-map {
+            position: relative;
+            margin-top: 5px;
+            height: 600px;
+            #container {
+                position: absolute;
+                left: 0;
+                top: 0; // height: 400px;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:768px) {
+    .main-container {
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        .contact-describle {
+            flex: 1;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            span:nth-child(1) {
+                font-size: 30px;
+                font-weight: bold;
+                color: #006323;
+            }
+            span {
+                font-size: 20px;
+                line-height: 40px;
+                margin: 8px;
+            }
+            img {
+                width: 100%;
+            }
+        }
+        .right-map {
+            flex: 1;
+            position: relative;
+            margin-left: 5px;
+            #container {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 100%;
             }
         }
     }
