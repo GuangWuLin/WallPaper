@@ -18,9 +18,6 @@
 .pro-select {
     display: table;
     margin: 20px;
-    .pro-span {
-        font-size: 20px;
-    }
 }
 </style>
 

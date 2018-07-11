@@ -1,37 +1,40 @@
 <template>
-    <section class="pic-container">
-        <div v-for="(item,index) in pictures" :key="index" class="pic-item" @click="currentClick(item)">
-            <div class="pic">
-                <a href="javascrip:;"><img v-lazy="item.img" alt=""></a>
-                <a href="javascrip:;">{{item.title}}</a>
-            </div>
-        </div>
-        <Modal v-model="currentSelected" width="660" :title='currentObj.title'>
-            <div style="text-align:center">
-                <img :src="currentObj.img" style="width:100%;height:100%;" alt="">
-            </div>
-        </Modal>
-    </section>
+    <picture-modal :pictures='pictures'>
+    </picture-modal>
 </template>
 <script>
-import global from 'assets/js/global'
+import PictureModal from 'base/pictureModal'
 export default {
-    props: ['pictures'],
+    components: {
+        PictureModal
+    },
     data() {
         return {
-            currentSelected: false,
-            currentObj: {
-                describe: '',
-                img: ''
-            },
+            pictures: []
         }
     },
     methods: {
-        currentClick(item) {
-            console.log(item)
-            this.currentSelected = true;
-            this.currentObj = item;
+        getHonor(item) {
+            this.$http.get('api/getAllProjects').then(res => {
+                let { success, msg, data } = res;
+                if (success) {
+                    if (data.length) {
+                        this.pictures = data.map(item => {
+                            return {
+                                title: item.title,
+                                img: item.img,
+                                id: item.id
+                            }
+                        });
+                    }
+                } else {
+                    this.$Message.warning('当前区域工程业绩查询失败,原因: ' + msg);
+                }
+            })
         }
+    },
+    mounted() {
+        this.getHonor();
     }
 }
 </script>

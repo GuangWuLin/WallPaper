@@ -4,16 +4,16 @@
         <Menu mode="horizontal" :theme="theme" @on-select='enterPro' active-name="home">
             <MenuItem name="home">
             <Icon type="home"></Icon>
-            首页
+            <span class="menu-title">首页</span>
             </MenuItem>
             <MenuItem name="news">
             <Icon type="social-twitter"></Icon>
-            最新资讯
+            <span class="menu-title">最新资讯</span>
             </MenuItem>
             <Submenu name="achievement">
                 <template slot="title">
                     <Icon type="social-buffer"></Icon>
-                    工程业绩
+                    <span class="menu-title">工程业绩</span>
                 </template>
                 <MenuGroup title="区域">
                     <MenuItem :name="item.name" v-for="(item,index) in projects" :key="index">{{item.label}}</MenuItem>
@@ -22,7 +22,7 @@
             <Submenu name="product">
                 <template slot="title">
                     <Icon type="stats-bars"></Icon>
-                    产品中心
+                    <span class="menu-title">产品中心</span>
                 </template>
                 <MenuGroup title="类别">
                     <MenuItem :name="item.name" v-for="(item,index) in productCenter" :key="index">{{item.label}}</MenuItem>
@@ -31,7 +31,7 @@
             <Submenu name="about">
                 <template slot="title">
                     <Icon type="university"></Icon>
-                    知识园地
+                    <span class="menu-title">知识园地</span>
                 </template>
                 <MenuGroup title="使用">
                     <MenuItem name="kownledge/product">产品知识</MenuItem>
@@ -41,19 +41,19 @@
             </Submenu>
             <MenuItem name="shop">
             <Icon type="ribbon-a"></Icon>
-            专卖店形象
+            <span class="menu-title">专卖店形象</span>
             </MenuItem>
             <MenuItem name="join">
             <Icon type="fireball"></Icon>
-            招商加盟
+            <span class="menu-title">招商加盟</span>
             </MenuItem>
             <MenuItem name="about">
             <Icon type="ios-people"></Icon>
-            关于我们
+            <span class="menu-title">关于我们</span>
             </MenuItem>
             <MenuItem name="contact">
             <Icon type="ios-telephone"></Icon>
-            联系我们
+            <span class="menu-title">联系我们</span>
             </MenuItem>
         </Menu>
     </Affix>

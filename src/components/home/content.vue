@@ -17,8 +17,6 @@
                     <div class="tag-describe">
                         <p>{{item.describe[0]}}</p>
                         <p>{{item.describe[1]}}</p>
-                        <p>{{item.describe[2]}}</p>
-                        <p>{{item.describe[3]}}</p>
                     </div>
                 </div>
             </li>
@@ -128,8 +126,8 @@ export default {
 @media screen and (max-width:375px) {
     .demo-carousel {
         img {
-            height: 200px;
-            width: 100%;
+            height: 300px;
+            width: 300px;
         }
     }
     .text-image {
@@ -138,7 +136,7 @@ export default {
             flex-direction: column;
             width: 100%;
             height: 100%;
-            margin: 5px;
+            margin: 5px 0;
             .content-left {
                 img {
                     height: 200px;
@@ -159,7 +157,7 @@ export default {
                 p[name='idea'] {
                     width: 100%;
                     height: 100%;
-                    font-size: 12px;
+                    font-size: 14px;
                     text-align: left;
                     overflow: hidden;
                 }
@@ -181,7 +179,7 @@ export default {
             flex-direction: column;
             width: 100%;
             height: 100%;
-            margin: 5px;
+            margin: 5px 0;
             .content-left {
                 img {
                     height: 200px;
@@ -202,7 +200,7 @@ export default {
                 p[name='idea'] {
                     width: 100%;
                     height: 100%;
-                    font-size: 12px;
+                    font-size: 14px;
                     text-align: left;
                     overflow: hidden;
                 }
@@ -220,7 +218,6 @@ export default {
     }
     .text-image {
         .content-body {
-            // box-sizing: border-box;
             display: flex;
             flex-direction: row;
             width: 100%;
@@ -246,7 +243,7 @@ export default {
                 p[name='idea'] {
                     width: 100%;
                     height: 100%;
-                    font-size: 12px;
+                    font-size: 14px;
                     text-align: left;
                     overflow: hidden;
                 }
@@ -283,7 +280,7 @@ export default {
         }
     }
     .text-image {
-        padding: 10px 40px;
+        padding: 10px 0px;
     }
 }
 </style>

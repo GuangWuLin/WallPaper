@@ -10,10 +10,16 @@
         <!-- 第二区中间介绍 -->
         <div class="router_view">
             <RadioGroup v-model="about_us" @on-change='radioChange'>
-                <Radio label="公司简介"></Radio>
-                <Radio label="资质荣誉"></Radio>
+                <Radio label="公司简介">
+                    <span class="pro-span">公司简介</span>
+                </Radio>
+                <Radio label="资质荣誉">
+                    <span class="pro-span">资质荣誉</span>
+                </Radio>
             </RadioGroup>
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </div>
         <!-- 第三区 装逼 -->
         <footers :footers='footers' :titleInfo='titleInfo'></footers>
@@ -45,15 +51,23 @@ export default {
                 },
                 {
                     title: '品质',
-                    type: 'flag',
+                    type: 'trophy',
                     size: 'about'
                 }
             ]
         }
     },
     methods: {
-        radioChange() {
-
+        radioChange(val) {
+            let path;
+            if (val === '公司简介') {
+                path = '/about/abstract';
+            } else {
+                path = '/about/honor'
+            }
+            this.$router.push({
+                path
+            });
         }
     }
 }

@@ -2,10 +2,6 @@
     <section>
         <section class="footer-container">
             <!-- 主标题和副标题 -->
-            <!-- <div v-if="footers[0].size==='home'">
-                    <span class="title-header">专业6步，步步为营</span>
-                    <span class="title sub-title">把一件事做到极致，用工匠精神激励前行</span>
-                </div> -->
             <div>
                 <span class="title-header">{{titleInfo.title}}</span>
                 <span class="title sub-title">{{titleInfo.subTitle}}</span>
@@ -68,7 +64,7 @@
                 }
             }
             span {
-                display: inline-block; // font-size: 18px;
+                display: inline-block;
                 margin-top: 10px;
             }
         }

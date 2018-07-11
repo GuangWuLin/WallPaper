@@ -19,7 +19,6 @@
         .who-pic {
             width: 100%;
             height: 200px;
-            padding: 0 10px;
             img {
                 height: 200px;
                 width: 100%;
@@ -49,20 +48,16 @@
 
 @media screen and (min-width:768px) {
     .who {
-        // line-height: 25px;
-        // font-size: 14px;
-        // text-align: left;
-        // text-indent: 2em;
         display: flex;
         flex-direction: row;
         .who-pic {
             width: 100%;
             height: 200px;
-            padding: 0 10px;
             flex: 1;
+            padding: 10px;
+            margin-top: 100px;
             img {
-                // height: 300px;
-                width: 100%; // align-self: flex-end;
+                width: 100%;
             }
         }
         .who-describle {
@@ -80,7 +75,7 @@
                 margin: 10px;
                 font-size: 14px;
                 line-height: 30px;
-                text-align: left; // letter-spacing: 5px;
+                text-align: left;
             }
         }
     }

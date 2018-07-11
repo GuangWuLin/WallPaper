@@ -3,9 +3,15 @@
         <single-bg></single-bg>
         <div class="pro-select">
             <RadioGroup v-model="knowledge_kind" @on-change='radioChange'>
-                <Radio label="产品知识"></Radio>
-                <Radio label="问题解答"></Radio>
-                <Radio label="施工方法"></Radio>
+                <Radio label="产品知识">
+                    <span class="pro-span">产品知识</span>
+                </Radio>
+                <Radio label="问题解答">
+                    <span class="pro-span">问题解答</span>
+                </Radio>
+                <Radio label="施工方法">
+                    <span class="pro-span">施工方法</span>
+                </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
             <block-pic :pictures='knowledges' @currentClicked='currentClicked'></block-pic>

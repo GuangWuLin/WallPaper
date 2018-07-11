@@ -1,9 +1,11 @@
 <template>
-    <section>
+    <section class="shop-content">
         <single-bg></single-bg>
         <div class="pro-select">
             <RadioGroup v-model="shop_image" @on-change='radioChange'>
-                <Radio label="专卖店形象"></Radio>
+                <Radio label="专卖店形象">
+                    <span class="pro-span">专卖店形象</span>
+                </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
             <block-pic :pictures='shopImages' @currentClicked='currentClicked'></block-pic>
@@ -61,9 +63,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.pro-select {
-    // display: flex;
-    // justify-content: center;
-    margin: 20px;
+.shop-content {
+    margin-bottom: 100px;
+    .pro-select {
+        margin: 20px;
+    }
 }
 </style>

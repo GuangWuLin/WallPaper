@@ -91,8 +91,5 @@ export default {
     // display: flex;
     // justify-content: center;
     margin: 20px;
-    .pro-span {
-        font-size: 20px;
-    }
 }
 </style>

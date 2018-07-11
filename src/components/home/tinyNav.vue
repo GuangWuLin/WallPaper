@@ -4,7 +4,7 @@
         <Submenu name="achievement">
             <template slot="title">
                 <Icon type="social-buffer"></Icon>
-                工程业绩
+                <span class="menu-title">工程业绩</span>
             </template>
             <MenuGroup title="区域">
                 <MenuItem :name="item.name" v-for="(item,index) in projects" :key="index">{{item.label}}</MenuItem>
@@ -13,7 +13,7 @@
         <Submenu name="product">
             <template slot="title">
                 <Icon type="stats-bars"></Icon>
-                产品中心
+                <span class="menu-title">产品中心</span>
             </template>
             <MenuGroup title="类别">
                 <MenuItem :name="item.name" v-for="(item,index) in productCenter" :key="index">{{item.label}}</MenuItem>
@@ -22,7 +22,7 @@
         <Submenu name="about">
             <template slot="title">
                 <Icon type="university"></Icon>
-                知识园地
+                <span class="menu-title">知识园地</span>
             </template>
             <MenuGroup title="使用">
                 <MenuItem name="kownledge/product">产品知识</MenuItem>
@@ -55,7 +55,7 @@
                 </DropdownItem>
                 <DropdownItem name='about'>
                     <Icon type="ios-people"></Icon>
-                    关于我们
+                    关于我们</span>
                 </DropdownItem>
                 <DropdownItem name='news'>
                     <Icon type="social-twitter"></Icon>
@@ -67,10 +67,6 @@
     </Menu>
 </template>
 <style lang="less" scoped>
-.menu-title {
-    font-size: 14px;
-}
-
 .right-select {
     position: absolute;
     right: -10px;

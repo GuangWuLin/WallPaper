@@ -3,7 +3,7 @@
     </pic>
 </template>
 <script>
-import Pic from 'components/about/honor'
+import Pic from 'base/pictureModal'
 export default {
     components: {
         Pic

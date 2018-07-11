@@ -5,10 +5,8 @@
         <nav1 class="nav1Hide"></nav1>
         <nav2 class="nav2Hide"></nav2>
       </Header>
-      <Content breakpoint='md' class="content">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+      <Content class="content">
+        <router-view></router-view>
       </Content>
       <Footer class="layout-footer-center" breakpoint='md'>
         <tail></tail>
@@ -27,17 +25,6 @@ export default {
     Nav1,
     Nav2,
     Tail
-  },
-  data() {
-    return {
-
-    }
-  },
-  methods: {
-
-  },
-  mounted() {
-
   }
 }
 </script>
@@ -95,7 +82,6 @@ export default {
     padding: 0;
   }
   .ivu-radio-wrapper {
-    // font-size: 1.4rem;
     color: #fff;
   }
   .ivu-layout-header {
