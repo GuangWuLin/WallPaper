@@ -1,6 +1,6 @@
 <template>
     <section class="wrap">
-        <contents></contents>
+        <contents @popupForm='popupForm'></contents>
         <Modal v-model="formShow" title="填写信息" @on-ok='asyncOK' @on-cancel='cancel'>
             <user-form ref='userForm' @invalidate='invalidate'></user-form>
         </Modal>
@@ -76,6 +76,9 @@ export default {
             setTimeout(_ => {
                 this.formShow = true;
             }, 500);
+        },
+        popupForm() {
+            this.formShow = true;
         }
     }
 }

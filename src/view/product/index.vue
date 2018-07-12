@@ -69,7 +69,7 @@ export default {
             this.getAllPictures();
         }
     },
-    activated() {
+    mounted() {
         this.getAllPictures();
     }
 }

@@ -39,7 +39,7 @@ export default {
 <style lang="less" scoped>
 .pic-container {
     width: 100%;
-    background: #fff; // padding: 0 20px;
+    background: #fff;
     margin: 10px 0;
     display: flex;
     flex-flow: row wrap;

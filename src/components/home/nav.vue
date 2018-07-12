@@ -2,9 +2,61 @@
     <Affix style="z-index:9999;">
         <!-- 导航栏 -->
         <Menu mode="horizontal" :theme="theme" @on-select='enterPro' active-name="home">
-            <MenuItem name="home">
-            <Icon type="home"></Icon>
-            <span class="menu-title">首页</span>
+            <div v-if="isGiantScreen">
+                <MenuItem name="home">
+                <Icon type="home"></Icon>
+                <span class="menu-title">首页</span>
+                </MenuItem>
+                <MenuItem name="shop">
+                <Icon type="ribbon-a"></Icon>
+                <span class="menu-title">专卖店形象</span>
+                </MenuItem>
+                <MenuItem name="join">
+                <Icon type="fireball"></Icon>
+                <span class="menu-title">招商加盟</span>
+                </MenuItem>
+                <MenuItem name="about">
+                <Icon type="ios-people"></Icon>
+                <span class="menu-title">关于我们</span>
+                </MenuItem>
+                <MenuItem name="contact">
+                <Icon type="ios-telephone"></Icon>
+                <span class="menu-title">联系我们</span>
+                </MenuItem>
+            </div>
+            <MenuItem v-else :name="singleOption" class="right-select">
+            <Dropdown @on-click='tellMe' trigger='hover'>
+                <a href="javascript:void(0)">
+                    下拉
+                    <Icon type="arrow-down-b"></Icon>
+                </a>
+                <DropdownMenu slot="list">
+                    <DropdownItem name='home'>
+                        <Icon type="home"></Icon>
+                        首页
+                    </DropdownItem>
+                    <DropdownItem name='shop'>
+                        <Icon type="ribbon-a"></Icon>
+                        专卖店形象
+                    </DropdownItem>
+                    <DropdownItem name='join'>
+                        <Icon type="fireball"></Icon>
+                        招商加盟
+                    </DropdownItem>
+                    <DropdownItem name='contact'>
+                        <Icon type="ios-telephone"></Icon>
+                        联系我们
+                    </DropdownItem>
+                    <DropdownItem name='about'>
+                        <Icon type="ios-people"></Icon>
+                        关于我们</span>
+                    </DropdownItem>
+                    <DropdownItem name='news'>
+                        <Icon type="social-twitter"></Icon>
+                        最新资讯
+                    </DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
             </MenuItem>
             <MenuItem name="news">
             <Icon type="social-twitter"></Icon>
@@ -39,25 +91,21 @@
                     <MenuItem name="kownledge/method">施工方法</MenuItem>
                 </MenuGroup>
             </Submenu>
-            <MenuItem name="shop">
-            <Icon type="ribbon-a"></Icon>
-            <span class="menu-title">专卖店形象</span>
-            </MenuItem>
-            <MenuItem name="join">
-            <Icon type="fireball"></Icon>
-            <span class="menu-title">招商加盟</span>
-            </MenuItem>
-            <MenuItem name="about">
-            <Icon type="ios-people"></Icon>
-            <span class="menu-title">关于我们</span>
-            </MenuItem>
-            <MenuItem name="contact">
-            <Icon type="ios-telephone"></Icon>
-            <span class="menu-title">联系我们</span>
-            </MenuItem>
+
         </Menu>
     </Affix>
 </template>
+<style lang="less" scoped>
+.right-select {
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    margin-left: 2px; // width: 100px;
+    a {
+        color: #fff;
+    }
+}
+</style>
 <script>
 import { Navs } from 'assets/js/mixin'
 export default {
@@ -65,6 +113,8 @@ export default {
     data() {
         return {
             theme: 'primary',
+            singleOption: '',
+            isGiantScreen: false
             // projects: []
         }
     },
@@ -131,9 +181,14 @@ export default {
                     this.$Message.warning('获取工程业绩菜单失败');
                 }
             })
+        },
+        tellMe(name) {
+            this.enterPro(name);
         }
     },
     mounted() {
+        let w = document.documentElement.clientWidth;
+        w <= 768 ? this.isGiantScreen = false : this.isGiantScreen = true;
         this.getProducts();
         this.getProjects()
     }

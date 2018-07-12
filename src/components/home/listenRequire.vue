@@ -8,7 +8,7 @@
                 <p name='about'>
                     青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说 青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说 青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说 青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说
                 </p>
-                <Button class="check-detail transButton">查看详情</Button>
+                <Button class="check-detail transButton" @click="go2About">查看详情</Button>
             </div>
             <!-- 第二区 -->
             <div class="our-need">
@@ -23,7 +23,7 @@
                 <span class="sub-title">专注高品质的设计</span>
                 <video src="../../../static/video/Productive-Morning.mp4" controls style="width:100%;height:75%;" loop='1' autoplay='1'></video>
                 <div style="width:100%;padding:0 20px;flex:1;">
-                    <Button class="contact-us transButton" long>联系我们，免费报价</Button>
+                    <Button class="contact-us transButton" long @click='popupForm'>联系我们，免费报价</Button>
                 </div>
             </div>
         </div>
@@ -133,6 +133,16 @@ export default {
     props: ['standards'],
     components: {
         OurAdvantage
+    },
+    methods: {
+        go2About() {
+            this.$router.replace({
+                path: '/about/abstract'
+            })
+        },
+        popupForm() {
+            this.$emit('popupForm');
+        }
     }
 }
 </script>

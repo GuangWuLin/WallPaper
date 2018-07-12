@@ -3,7 +3,6 @@
     <Layout>
       <Header>
         <nav1 class="nav1Hide"></nav1>
-        <nav2 class="nav2Hide"></nav2>
       </Header>
       <Content class="content">
         <router-view></router-view>
@@ -17,13 +16,11 @@
 
 <script>
 import Nav1 from 'components/home/nav'
-import Nav2 from 'components/home/tinyNav'
 import Tail from 'base/tail'
 export default {
   name: 'App',
   components: {
     Nav1,
-    Nav2,
     Tail
   }
 }
@@ -33,21 +30,6 @@ export default {
 @import "./assets/css/mixin.less";
 @media screen and (max-width:767px) {
   .layout-footer-center {
-    display: none;
-  }
-  .nav1Hide {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1020px) {
-  .nav1Hide {
-    display: none;
-  }
-}
-
-@media screen and (min-width:1024px) {
-  .nav2Hide {
     display: none;
   }
 }
@@ -93,6 +75,7 @@ export default {
   }
   .content {
     margin-top: 60px;
+    margin-bottom: 100px;
   }
 }
 

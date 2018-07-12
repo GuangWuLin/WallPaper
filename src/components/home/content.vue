@@ -43,7 +43,7 @@
             <h3>始终以专业的设计视角和前沿的开发技术为基础</h3>
             <block-show :exhibitions='successCase'></block-show>
         </div>
-        <listen-require :standards='standards'></listen-require>
+        <listen-require :standards='standards' @popupForm='popupForm'></listen-require>
     </section>
 </template>
 <script>
@@ -74,13 +74,6 @@ export default {
                 let { success, data, msg } = res;
                 if (success) {
                     if (data.length) {
-                        // data.forEach(item => {
-                        //     this.successCase.push({
-                        //         title: item.title,
-                        //         describe: item.describe,
-                        //         img: item.img
-                        //     })
-                        // })
                         this.successCase = data.map(item => {
                             return {
                                 title: item.title,
@@ -114,6 +107,9 @@ export default {
             this.$http.get('api/GetBlockInfo').then(res => {
 
             })
+        },
+        popupForm() {
+            this.$emit('popupForm');
         }
     },
     mounted() {
