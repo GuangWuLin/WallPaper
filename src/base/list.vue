@@ -51,11 +51,11 @@
                 margin: 10px;
             }
             .list-title {
-                font-size: 16px;
+                font-size: 20px;
                 font-weight: bold;
             }
             .list-sub-title {
-                font-size: 14px;
+                font-size: 16px;
             }
             p {
                 word-break: break-all;

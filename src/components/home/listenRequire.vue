@@ -47,7 +47,7 @@
             }
             .sub-title,
             p {
-                font-size: 16px;
+                font-size: 20px;
                 line-height: 32px;
                 margin: 10px;
             }
@@ -96,7 +96,7 @@
             }
             .sub-title,
             p {
-                font-size: 16px;
+                font-size: 20px;
                 line-height: 23px;
                 margin: 10px;
             }

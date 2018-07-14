@@ -147,7 +147,7 @@ export default {
                 flex-direction: column;
                 .sub-title {
                     text-align: center;
-                    font-size: 16px;
+                    font-size: 20px;
                     font-weight: bold;
                 }
                 p[name='idea'] {
@@ -190,7 +190,7 @@ export default {
                 flex-direction: column;
                 .sub-title {
                     text-align: center;
-                    font-size: 16px;
+                    font-size: 20px;
                     font-weight: bold;
                 }
                 p[name='idea'] {
@@ -233,7 +233,7 @@ export default {
                 flex-direction: column;
                 .sub-title {
                     text-align: center;
-                    font-size: 16px;
+                    font-size: 20px;
                     font-weight: bold;
                 }
                 p[name='idea'] {

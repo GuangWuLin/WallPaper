@@ -30,7 +30,7 @@
             border: 1px solid transparent;
             transition: all .5s linear;
             a {
-                font-size: 16px;
+                font-size: 20px;
             }
             a:first-child {
                 display: inline-block;
@@ -43,7 +43,7 @@
                 bottom: 0;
                 left: 0;
                 z-index: 1;
-                font-size-adjust: 16px;
+                font-size-adjust: 20px;
                 color: #fff;
                 background-color: rgba(0, 0, 0, .4);
                 line-height: 50px;

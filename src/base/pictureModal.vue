@@ -58,7 +58,7 @@ export default {
             border: 1px solid transparent;
             transition: all .5s linear;
             a {
-                font-size: 16px;
+                font-size: 20px;
             }
             a:first-child {
                 display: inline-block;
@@ -74,7 +74,7 @@ export default {
                 bottom: 0;
                 color: #fff;
                 z-index: 1;
-                font-size-adjust: 16px;
+                font-size-adjust: 20px;
                 line-height: 50px;
                 background-color: rgba(0, 0, 0, .4);
                 transition: bottom .5s linear;

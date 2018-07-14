@@ -12,7 +12,7 @@ import VueLazyload from 'vue-lazyload'
 import 'lib-flexible';
 Vue.use(http)
 Vue.use(VueLazyload, {
-  loading: require('assets/img/img5.jpg')
+  loading: require('../static/img/32.jpeg')
 })
 Vue.prototype.$http = http;
 Vue.config.productionTip = false;
