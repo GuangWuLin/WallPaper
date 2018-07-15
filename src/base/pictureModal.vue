@@ -28,7 +28,6 @@ export default {
     },
     methods: {
         currentClick(item) {
-            console.log(item)
             this.currentSelected = true;
             this.currentObj = item;
         }
@@ -43,12 +42,12 @@ export default {
     margin: 10px 0;
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-around;
     .pic-item {
         box-sizing: border-box;
         width: 300px;
         height: 300px;
-        margin: 10px 0;
-        flex-grow: 1;
+        margin: 10px 0; // flex-grow: 1;
         .pic {
             height: 100%;
             width: 300px;

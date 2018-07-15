@@ -18,7 +18,7 @@
                 </Radio>
             </RadioGroup>
             <keep-alive>
-                <router-view></router-view>
+                <router-view style="width:100%;"></router-view>
             </keep-alive>
         </div>
         <!-- 第三区 装逼 -->
@@ -33,7 +33,7 @@ export default {
     },
     data() {
         return {
-            about_us: '公司简介',
+            about_us: '',
             titleInfo: {
                 title: '匠心独运',
                 subTitle: '用专业表达专业'
@@ -68,6 +68,13 @@ export default {
             this.$router.push({
                 path
             });
+        }
+    },
+    mounted() {
+        if (this.$route.name === 'abstract') {
+            this.about_us = '公司简介';
+        } else if (this.$route.name === 'honor') {
+            this.about_us = '资质荣誉';
         }
     }
 }
@@ -109,6 +116,7 @@ export default {
     }
     .router_view {
         margin: 10px auto;
+        width: 100%;
         &::after {
             content: '';
             display: inline;

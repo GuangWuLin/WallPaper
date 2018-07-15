@@ -7,16 +7,16 @@ import store from './store'
 import 'iview/dist/styles/iview.css';
 import 'animate.css';
 import "../static/css/hover.css";
-import http from './utils/axios'
 import VueLazyload from 'vue-lazyload'
 import 'lib-flexible';
-Vue.use(http)
+//全局引入api接口
+import {request} from 'api/api'
 Vue.use(VueLazyload, {
   loading: require('../static/img/32.jpeg')
 })
-Vue.prototype.$http = http;
+Vue.prototype.$http = request;
 Vue.config.productionTip = false;
-require('./assets/js/mock.js');
+// require('./assets/js/mock.js');
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

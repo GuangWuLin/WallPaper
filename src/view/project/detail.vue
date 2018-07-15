@@ -19,19 +19,27 @@ export default {
         }
     },
     methods: {
-        getNews() {
+        // 获取当前工程的详情
+        getProjectInfo() {
             let param = {
-                id: this.id
+                projectId: this.id
+            }
+            this.content = {
+                title: '',
+                date: '',
+                content: ''
             }
             this.spinShow = true;
-            this.$http.news.company.newsInfo(param).then(res => {
-                this.spinShow = false;
+            this.$http.projects.projectInfo(param).then(res => {
                 let { success, msg, data } = res;
+                this.spinShow = false;
                 if (success) {
-                    this.content = {
-                        ...this.$route.params.param,
-                        ...data,
-                    };
+                    if (typeof data === 'object' && Object.keys(data).length) {
+                        this.content = {
+                            ...this.$route.params,
+                            ...data,
+                        };
+                    }
                 } else {
                     this.$Message.warning('新闻详情请求数据失败，原因： ' + msg);
                 }
@@ -39,8 +47,8 @@ export default {
         }
     },
     mounted() {
-        this.id = this.$route.params.param.id;
-        this.getNews();
+        this.id = this.$route.params.id;
+        this.getProjectInfo();
     }
 }
 </script>

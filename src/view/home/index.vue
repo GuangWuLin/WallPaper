@@ -62,7 +62,7 @@ export default {
     methods: {
         asyncOK() {
             const child = this.$refs.userForm;
-            if (!child.formValidate.name || !child.formValidate.phone) {
+            if (!child.formValidate.name || !child.formValidate.phoneNo) {
                 this.$Message.warning('请填写完信息再提交哟');
                 this.invalidate();
                 return

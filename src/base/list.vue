@@ -2,15 +2,15 @@
     <!-- 列表显示 -->
     <section class="list-container">
         <!-- 单个 cell 的列表 -->
-        <div class="list-card" v-for='(item,index) in listData' :key="index" @click="toDetail(item)">
+        <div class="list-card" v-for='(item,index) in list' :key="index" @click="toDetail(item)">
             <!-- 左侧图片 -->
-            <img src="../../static/img/32.jpeg" alt="">
+            <img :src="item.img" alt="">
             <!-- 右侧描述 -->
             <div class="list-card-right">
                 <span class="list-title">{{item.title}}</span>
                 <span class="list-sub-title">{{item.date}}</span>
                 <p>
-                    {{item.describe}}
+                    {{item.abstract}}
                 </p>
             </div>
         </div>
@@ -32,7 +32,6 @@
         justify-content: space-between;
         border: 1px solid rgba(0, 180, 220, 0.5);
         img {
-            // flex: 1;
             width: 200px;
             height: 200px;
             perspective: 1px;
@@ -93,32 +92,7 @@
 
 <script>
 export default {
-    data() {
-        return {
-            listData: [
-                {
-                    title: 'HelloKitty',
-                    date: '2017-09-01',
-                    describe: '青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今'
-                },
-                {
-                    title: 'HelloKitty',
-                    date: '2017-09-01',
-                    describe: '青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今'
-                },
-                {
-                    title: 'HelloKitty',
-                    date: '2017-09-01',
-                    describe: '青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今'
-                },
-                {
-                    title: 'HelloKitty',
-                    date: '2017-09-01',
-                    describe: '青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今 青青子衿悠悠我心但为君故沉吟至今'
-                }
-            ]
-        }
-    },
+    props: ['list'],
     methods: {
         toDetail(item) {
             this.$emit('toDetail', item);

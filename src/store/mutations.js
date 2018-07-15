@@ -13,5 +13,11 @@ const mutations = {
   [types.SET_CURRENT_PROJECT](state, data) {
     state.currentProject = data
   },
+  [types.SET_CURRENT_KNOWLEDGE](state, data) {
+    state.currentKnowledge = data
+  },
+  [types.SET_KNOWLEDGES](state, data) {
+    state.knowledges = data
+  },
 }
 export default mutations;

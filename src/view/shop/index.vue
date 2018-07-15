@@ -18,7 +18,7 @@ import BlockPic from 'base/picture'
 export default {
     data() {
         return {
-            shop_image: '',
+            shop_image: '专卖店形象',
             shopImages: []
         }
     },
@@ -27,14 +27,14 @@ export default {
 
         },
         getAllPictures() {
-            this.$http.get('api/getShopImage').then(res => {
+            this.$http.shop.agency().then(res => {
                 let { success, msg, data } = res;
                 if (success) {
                     if (data.length) {
                         this.shopImages = data.map(item => {
                             return {
                                 title: item.title,
-                                img: item.img,
+                                img: item.imgUrl,
                                 id: item.id
                             }
                         });
@@ -45,6 +45,7 @@ export default {
             })
         },
         currentClicked(item) {
+            console.log(item)
             this.$router.push({
                 name: 'shopDetail',
                 params: {

@@ -16,7 +16,8 @@
 </template>
 <style lang="less" scoped>
 .pro-select {
-    display: table;
+    // display: table;
+    width: 100%;
     margin: 20px;
 }
 </style>
@@ -34,25 +35,34 @@ export default {
     data() {
         return {
             pro_value: '',
+            currentCategory: '',
             currentProducts: []
         }
     },
     watch: {
+        // 当前选中的产品分类
         currentProduct(val) {
             let current = this.productCenter.find(item => item.value === val);
             this.pro_value = current.label;
+            this.currentCategory = val;
+            this.getAllPictures();
         }
     },
     methods: {
+        // 请求全部产品数据
         getAllPictures() {
-            this.$http.get('api/getAllProducts').then(res => {
+            let param = {
+                productType: this.currentCategory
+            }
+            this.currentProducts = [];
+            this.$http.products.list(param).then(res => {
                 let { success, msg, data } = res;
                 if (success) {
                     if (data.length) {
                         this.currentProducts = data.map(item => {
                             return {
-                                title: item.title,
-                                img: item.img
+                                title: item.label,
+                                img: item.imgUrl
                             }
                         })
                     }
@@ -63,13 +73,17 @@ export default {
         },
         // 改变选项
         radioChange(val) {
-            console.log(val);
             let tmp = this.productCenter.find(item => item.label == val);
-            // console.error(tmp);
+            this.currentCategory = tmp.value;
             this.getAllPictures();
         }
     },
     mounted() {
+        // id 就是 当前案的 category
+        this.currentCategory = this.$route.params.id;
+        // 筛选 category
+        let temp = this.productCenter.find(item => item.value === this.currentCategory);
+        this.pro_value = temp.label;
         this.getAllPictures();
     }
 }

@@ -16,7 +16,7 @@ axios.interceptors.response.use(response => {
   return Promise.resolve(err.response)
 })
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'; //跨域
-axios.defaults.headers['Cache-Control'] = 'max-age=120000'; //缓存
+// axios.defaults.headers['Cache-Control'] = 'max-age=120000'; //缓存
 axios.defaults.withCredentials = false; //自动上传浏览器cookic,本地false，线上true
 function checkStatus(response) {
   // loading
@@ -86,13 +86,13 @@ function checkStatus(response) {
 function checkCode(res) {
   // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
   if (res.status === -404) {
-    Message({message: res.msg, type: 'error'});
+    alert(res.msg);
     LoadingBar.finish();
     // return Promise.reject(res);
     return res;
   }
   if (!res.success) {
-    Message({message: res.msg, type: 'error'});
+    alert(res.msg);
     LoadingBar.finish();
     // return Promise.reject(res);
     return res;

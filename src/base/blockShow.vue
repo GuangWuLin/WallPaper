@@ -1,14 +1,14 @@
 <template>
     <section class="exhibition">
-        <div class="hvr-bounce-to-right exhition-bg" v-for="(item,index) in exhibitions" v-lazy:background-image='item.img' :key="index" :href='item.title'></div>
+        <div class="hvr-bounce-to-right exhition-bg" v-for="(item,index) in exhibitions" v-lazy:background-image='item.img' :key="index" :href='item.title' @click='toDetail(item)'></div>
     </section>
 </template>
 <script>
 export default {
     props: ['exhibitions'],
-    data() {
-        return {
-            // exhibitions: []
+    methods: {
+        toDetail(item) {
+            this.$emit('toDetail', item);
         }
     }
 }

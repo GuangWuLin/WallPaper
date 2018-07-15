@@ -86,9 +86,9 @@
                     <span class="menu-title">知识园地</span>
                 </template>
                 <MenuGroup title="使用">
-                    <MenuItem name="kownledge/product">产品知识</MenuItem>
-                    <MenuItem name="kownledge/QA">问题解答</MenuItem>
-                    <MenuItem name="kownledge/method">施工方法</MenuItem>
+                    <MenuItem name="knowledge/product">产品知识</MenuItem>
+                    <MenuItem name="knowledge/QA">问题解答</MenuItem>
+                    <MenuItem name="knowledge/method">施工方法</MenuItem>
                 </MenuGroup>
             </Submenu>
 
@@ -121,17 +121,19 @@ export default {
     methods: {
         // 获取产品中心二级菜单
         getProducts() {
-            this.$http.get('api/getProducts').then(res => {
+            this.$http.home.type().then(res => {
                 let { success, data, msg } = res;
                 if (success) {
+                    // console.log(res);
                     if (data.length) {
                         let productCenter = data.map(item => {
                             return {
                                 label: item.label,
-                                name: `${item.name}/${item.value}`,
-                                value: item.value
+                                name: `product/${item.id}`,
+                                value: item.id
                             }
                         })
+                        // item.id 就是该选项的 category
                         this.SET_PRO_CENTER(productCenter);
                     } else {
                         this.$Message.warning('产品分类暂无数据');
@@ -143,6 +145,7 @@ export default {
         },
         // 跳转路由
         enterPro(item) {
+            console.warn(item)
             let arr = item.split('/');
             if (arr.length === 1) {
                 this.$router.push({
@@ -150,9 +153,14 @@ export default {
                 });
             } else {
                 if (arr[0] === 'product') {
+                    // 设置当前选中的产品分类
                     this.SET_CURRENT_PRODUCT(arr[1]);
                 } else if (arr[0] === 'project') {
+                    // 设置当前选中的工程分类
                     this.SET_CURRENT_PROJECT(arr[1]);
+                } else if (arr[0] === 'knowledge') {
+                    // 设置当前选中的知识类型分类
+                    this.SET_CURRENT_KNOWLEDGE(arr[1]);
                 }
                 this.$router.push({
                     name: arr[0],
@@ -164,23 +172,44 @@ export default {
         },
         // 获取工程业绩的耳机菜单
         getProjects() {
-            this.$http.get('api/getProjects').then(res => {
+            this.$http.home.options().then(res => {
                 let { success, data, msg } = res;
                 if (success) {
                     if (data.length) {
                         let projects = data.map(item => {
                             return {
-                                label: item.label,
-                                value: item.value,
-                                name: `${item.name}/${item.value}`
+                                label: item.area,
+                                value: item.id,
+                                name: `project/${item.id}`
                             }
-                        })
+                        });
+                        // item.id 就是该选项的 category
                         this.SET_PROJECTS(projects);
                     }
                 } else {
                     this.$Message.warning('获取工程业绩菜单失败');
                 }
             })
+        },
+        getKnowledges() {
+            let knowledges = [
+                {
+                    label: '产品知识',
+                    value: 'product',
+                    name: 'knowledge/product'
+                },
+                {
+                    label: '问题解答',
+                    value: 'QA',
+                    name: 'knowledge/QA'
+                },
+                {
+                    label: '施工方法',
+                    value: 'method',
+                    name: 'knowledge/method'
+                }
+            ];
+            this.SET_KNOWLEDGES(knowledges);
         },
         tellMe(name) {
             this.enterPro(name);
@@ -190,7 +219,8 @@ export default {
         let w = document.documentElement.clientWidth;
         w <= 768 ? this.isGiantScreen = false : this.isGiantScreen = true;
         this.getProducts();
-        this.getProjects()
+        this.getProjects();
+        this.getKnowledges();
     }
 }
 </script>

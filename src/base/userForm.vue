@@ -3,11 +3,11 @@
         <FormItem label="称呼" prop="name">
             <Input v-model="formValidate.name" placeholder="请输入您的姓名"></Input>
         </FormItem>
-        <FormItem label="电话" prop="phone">
-            <Input v-model="formValidate.phone" placeholder="请输入您的电话"></Input>
+        <FormItem label="电话" prop="phoneNo">
+            <Input v-model="formValidate.phoneNo" placeholder="请输入您的电话"></Input>
         </FormItem>
         <FormItem label="描述" prop="desc">
-            <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请描述您的需求..."></Input>
+            <Input v-model="formValidate.describe" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请描述您的需求..."></Input>
         </FormItem>
     </Form>
 </template>
@@ -18,14 +18,14 @@ export default {
         return {
             formValidate: {
                 name: '',
-                phone: '',
-                desc: ''
+                phoneNo: '',
+                describe: ''
             },
             ruleValidate: {
                 name: [
                     { required: true, message: '称呼不能为空 ...', trigger: 'blur' }
                 ],
-                phone: [
+                phoneNo: [
                     { required: true, message: '请填写电话号码', trigger: 'blur' }
                 ]
             }
@@ -35,12 +35,12 @@ export default {
         handleSubmit() {
             this.$refs['formValidate'].validate((valid) => {
                 if (valid) {
-                    if (!global.IsPhone(this.formValidate.phone)) {
+                    if (!global.IsPhone(this.formValidate.phoneNo)) {
                         this.$Message.error('请填写正确的电话号码');
                         this.$emit('invalidate');
                         return
                     }
-                    this.$Message.success('Success!');
+                    this.submit();
                 }
             })
         },
@@ -48,12 +48,12 @@ export default {
             this.$refs['formValidate'].resetFields();
         },
         submit() {
-            this.$http.post().then(res => {
+            this.$http.clientInfo(this.formValidate).then(res => {
                 let { success, data, msg } = res;
                 if (success) {
-
+                    this.$Message.success('信息提交成功!');
                 } else {
-
+                    this.$Message.warning('用户需求提交失败，原因： ' + msg);
                 }
             })
         }

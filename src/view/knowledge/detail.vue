@@ -19,17 +19,17 @@ export default {
         }
     },
     methods: {
-        getNews() {
+        getKnowledgeInfo() {
             let param = {
-                id: this.id
+                knowTypeId: this.id
             }
             this.spinShow = true;
-            this.$http.news.company.newsInfo(param).then(res => {
-                this.spinShow = false;
+            this.$http.knowledge.knowledgeInfo(param).then(res => {
                 let { success, msg, data } = res;
+                this.spinShow = false;
                 if (success) {
                     this.content = {
-                        ...this.$route.params.param,
+                        ...this.$route.params,
                         ...data,
                     };
                 } else {
@@ -39,8 +39,8 @@ export default {
         }
     },
     mounted() {
-        this.id = this.$route.params.param.id;
-        this.getNews();
+        this.id = this.$route.params.id;
+        this.getKnowledgeInfo();
     }
 }
 </script>

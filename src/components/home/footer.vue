@@ -12,7 +12,7 @@
                     <div class="pro-step">
                         <Icon :type="item.type" class="pro-icon"></Icon>
                     </div>
-                    <span>{{item.title}}</span>
+                    <span class="pro-title">{{item.title}}</span>
                 </div>
             </div>
         </section>
@@ -62,6 +62,9 @@
                         transform: rotate(360deg);
                     }
                 }
+            }
+            .pro-title {
+                font-size: 20px;
             }
             span {
                 display: inline-block;

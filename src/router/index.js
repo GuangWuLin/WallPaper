@@ -54,15 +54,30 @@ const Project = resolve => {
     resolve(module);
   })
 }
+const ProjectDetail = resolve => {
+  import('view/project/detail').then(module => {
+    resolve(module);
+  })
+}
 // 知识园地
-const Kownledge = resolve => {
-  import('view/kownledge/index').then(module => {
+const Knowledge = resolve => {
+  import('view/knowledge/index').then(module => {
+    resolve(module);
+  })
+}
+const KnowledgeDetail = resolve => {
+  import('view/knowledge/detail').then(module => {
     resolve(module);
   })
 }
 // 专卖店形象
 const Shop = resolve => {
   import('view/shop/index').then(module => {
+    resolve(module);
+  })
+}
+const ShopDetail = resolve => {
+  import('view/shop/detail').then(module => {
     resolve(module);
   })
 }
@@ -139,19 +154,19 @@ const router = new Router({
     {
       path:'/project/detail',
       name:'projectDetail',
-      component: Detail,
+      component: ProjectDetail,
     },
     // 知识园地
     {
-      path:'/kownledge',
-      name:'kownledge',
-      component: Kownledge
+      path:'/knowledge/:id',
+      name:'knowledge',
+      component: Knowledge
     },
      // 知识园地详情
     {
-      path:'/kownledge/detail',
-      name:'kownledgeDetail',
-      component: Detail,
+      path:'/knowledge/detail',
+      name:'knowledgeDetail',
+      component: KnowledgeDetail,
     },
     // 专卖店
     {
@@ -163,7 +178,7 @@ const router = new Router({
     {
       path:'/shop/detail',
       name:'shopDetail',
-      component: Detail,
+      component: ShopDetail,
     },
     // 招商加盟
     {

@@ -23,6 +23,7 @@ export default {
     data() {
         return {
             project_area: '',
+            currentCategory: '',
             currentProjects: []
         }
     },
@@ -30,22 +31,27 @@ export default {
         currentProject(val) {
             let current = this.projects.find(item => item.value == val);
             this.project_area = current.label;
+            this.currentCategory = val;
+            this.getAllPictures();
         }
     },
     methods: {
         getAllPictures() {
-            this.$http.get('api/getAllProjects').then(res => {
+            let param = {
+                area: this.currentCategory
+            }
+            this.currentProjects = [];
+            this.$http.projects.projectList(param).then(res => {
                 let { success, msg, data } = res;
                 if (success) {
                     if (data.length) {
                         this.currentProjects = data.map(item => {
                             return {
                                 title: item.title,
-                                img: item.img,
+                                img: item.imgUrl,
                                 id: item.id
                             }
-                        })
-                        console.log(this.currentProjects)
+                        });
                     }
                 } else {
                     this.$Message.warning('当前区域工程业绩查询失败,原因: ' + msg);
@@ -54,7 +60,6 @@ export default {
         },
         // 工程业绩点击某一个图片
         currentClicked(item) {
-            // console.log(item)
             this.$router.push({
                 name: 'projectDetail',
                 params: {
@@ -63,6 +68,9 @@ export default {
             })
         },
         radioChange(val) {
+            console.log(val);
+            let temp = this.projects.find(item => item.label === val);
+            this.currentCategory = temp.value;
             this.getAllPictures();
         }
     },
@@ -73,8 +81,13 @@ export default {
     mounted() {
         this.getAllPictures();
     },
-    activated() {
-        console.log(this.$route)
+    mounted() {
+        console.log(this.$route);
+        // id 就是 当前案的 category
+        this.currentCategory = this.$route.params.id;
+        // 筛选 category
+        let temp = this.projects.find(item => item.value === this.currentCategory);
+        this.project_area = temp.label;
         this.getAllPictures();
     }
 }

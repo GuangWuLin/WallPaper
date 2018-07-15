@@ -11,28 +11,31 @@
         <!-- 块级介绍 -->
         <ul class="block-ul">
             <li class="tag" v-for="(item,index) in professional" :key="index">
-                <img :src="item.img" alt="">
+                <!-- <div class="tag-information">
+                                <Icon type="clipboard"></Icon>
+                                <h2>{{item.title}}</h2>
+                                <div class="tag-describe">
+                                    <p>{{item.describe[0]}}</p>
+                                    <p>{{item.describe[1]}}</p>
+                                </div>
+                            </div> -->
                 <div class="tag-information">
-                    <h2>{{item.title}}</h2>
-                    <div class="tag-describe">
-                        <p>{{item.describe[0]}}</p>
-                        <p>{{item.describe[1]}}</p>
-                    </div>
+                    <Icon :type="item.type" class="tag-icon"></Icon>
                 </div>
             </li>
         </ul>
         <div class="text-image">
-            <span class="title">xxxx专注于高品质的墙纸</span>
+            <span class="title">专注于高品质的墙纸</span>
             <div class="content-body">
                 <!-- 图片展示  -->
                 <div class="content-left">
-                    <img class="animated bounceInLeft" src="../../assets/img/img1.jpg" alt="">
+                    <img class="animated bounceInLeft" :src="idea.img" alt="">
                 </div>
                 <!-- 两列两横简介  -->
                 <div class="col-content">
                     <span class="sub-title"> 先进的设计理念</span>
                     <p name='idea'>
-                        利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布 我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布 我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布我们充分利用色彩颁布
+                        {{idea.describe}}
                     </p>
                 </div>
             </div>
@@ -41,9 +44,9 @@
         <div class="case-exhibition">
             <span class="title">我们的成功案例</span>
             <h3>始终以专业的设计视角和前沿的开发技术为基础</h3>
-            <block-show :exhibitions='successCase'></block-show>
+            <block-show :exhibitions='successCase' @toDetail='toDetail'></block-show>
         </div>
-        <listen-require :standards='standards' @popupForm='popupForm'></listen-require>
+        <listen-require :requires='requires' @popupForm='popupForm'></listen-require>
     </section>
 </template>
 <script>
@@ -58,10 +61,39 @@ export default {
     data() {
         return {
             value2: 2,
+            idea: {
+                title: '',
+                img: ''
+            },
             right_arrow: global.right_arrow,
-            carousels: [global.img1, global.img2, global.img3, global.img4, global.img5],
-            standards: ['技术创新', '团队协作', '品质坚持'],
-            professional: [],// 四个专业介绍
+            carousels: [],
+            requires: {
+                about: '',
+                describe: '',
+                advantage: []
+            },
+            professional: [
+                {
+                    title: '创意墙纸设计',
+                    describe: ['无缝墙布', '提花挂画'],
+                    type: 'clipboard'
+                },
+                {
+                    title: '网络整合营销',
+                    describe: ['社交媒体推广', 'PPC广告多平台投放'],
+                    type: 'clipboard'
+                },
+                {
+                    title: '原料清洁健康',
+                    describe: ['环保无异味', '无甲醛不挥发'],
+                    type: 'clipboard'
+                },
+                {
+                    title: '多元客户不单一',
+                    describe: ['企业室内墙纸设计', '住宅壁挂规划'],
+                    type: 'clipboard'
+                }
+            ],// 四个专业介绍
             successCase: [],//成功案例
             blockInfo: []
         }
@@ -70,18 +102,17 @@ export default {
         // 成功案例
         getSuccessCase() {
             this.successCase = [];
-            this.$http.get('api/getSuccessCase').then(res => {
+            this.$http.home.list().then(res => {
                 let { success, data, msg } = res;
                 if (success) {
                     if (data.length) {
                         this.successCase = data.map(item => {
                             return {
-                                title: item.title,
-                                describe: item.describe,
-                                img: item.img
+                                ...item,
+                                img: item.imgUrl
                             }
-                        })
-                        console.log(this.successCase)
+                        });
+                        // 此时的 categroy 就是当前案例的分类，id就是它的id
                     } else {
                         this.$Message.warning('工程进度分类暂无数据');
                     }
@@ -90,31 +121,70 @@ export default {
                 }
             })
         },
-        // 四个专业介绍
-        getProfessional() {
-            this.professional = [];
-            this.$http.get('api/getProfessional').then(res => {
+        // 获取轮播图
+        getCarousels() {
+            this.carousels = [];
+            this.$http.home.getCarousel().then(res => {
                 let { success, data, msg } = res;
                 if (success) {
                     if (data.length) {
-                        this.professional = data;
+                        this.carousels = data;
                     }
+                } else {
+                    this.$Message.warning('轮播图数据获取失败，原因： ' + msg);
                 }
             })
         },
-
-        getBlockDescribe() {
-            this.$http.get('api/GetBlockInfo').then(res => {
-
+        // 公司理念
+        getCompanyIdea() {
+            this.$http.home.idea().then(res => {
+                let { success, data, msg } = res;
+                if (success) {
+                    if (typeof data === 'object' && Object.keys(data).length) {
+                        this.idea.describe = data.describe;
+                        this.idea.img = data.imgUrl;
+                    }
+                } else {
+                    this.$Message.warning('公司理念信息获取失败，原因： ' + msg);
+                }
+            })
+        },
+        // 倾听客户的需求
+        getAdvantage() {
+            this.$http.home.getAdvantage().then(res => {
+                let { success, data, msg } = res;
+                if (success) {
+                    if (typeof data === 'object' && Object.keys(data).length) {
+                        this.requires.describe = data.describe;
+                        this.requires.about = data.about;
+                        this.requires.advantage = [data.advantage1, data.advantage2, data.advantage3];
+                    }
+                } else {
+                    this.$Message.warning('公司简介获取失败，原因： ' + msg);
+                }
             })
         },
         popupForm() {
             this.$emit('popupForm');
+        },
+        toDetail(val) {
+            this.$router.push({
+                name: 'product',
+                params: {
+                    // id 是当前 案例的 分类
+                    id: val.category,
+                    // val 里面的 id 是当前案例的id
+                    item: val
+                }
+            })
         }
     },
     mounted() {
-        this.getProfessional();
+        // this.getProfessional();
         this.getSuccessCase();
+        this.getCarousels();
+        this.getCompanyIdea();
+        this.getAdvantage();
     }
 }
 </script>
@@ -261,16 +331,26 @@ export default {
         justify-content: center;
         padding: 10px 40px;
         li {
-            float: left;
             margin: 10px auto;
-            img {
+            .tag-information {
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
-                transition: all .5s linear;
+                background: #fff;
+                margin: 0 auto;
+                transition: all 0.2s linear;
+                .tag-icon {
+                    font-size: 50px;
+                    line-height: 100px;
+                    color: #2d8cf0;
+                    transition: all .8s ease-in-out;
+                }
                 &:hover {
                     transform: translate(0, -10px);
-                    transition: all .5s linear;
+                }
+                &:nth-child(2),
+                &:nth-child(4) {
+                    background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%) !important;
                 }
             }
         }

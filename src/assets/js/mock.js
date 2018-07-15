@@ -24,7 +24,7 @@ Mock.mock(/api\/getProfessional/, {
   success: true,
   msg: '',
   'data|4': [
-    { "title":"@cname" , "describe|4": ['精品语文班','精品作业A班','英语班','语文班'],"img":'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3133337892,2886046925&fm=173&app=25&f=JPEG?w=640&h=360&s=C4DA33C2484AAB599C58BD1E0100C0C0' }
+    { "title":"@cname" , "describe|4": ['精品语文班','精品作业A班'],"img":'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3133337892,2886046925&fm=173&app=25&f=JPEG?w=640&h=360&s=C4DA33C2484AAB599C58BD1E0100C0C0' }
   ]
 });
 // 轮播图的浮层文字

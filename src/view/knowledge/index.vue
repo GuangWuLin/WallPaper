@@ -14,36 +14,57 @@
                 </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
-            <block-pic :pictures='knowledges' @currentClicked='currentClicked'></block-pic>
+            <block-pic :pictures='Knowledges' @currentClicked='currentClicked'></block-pic>
         </div>
+        <Spin size="large" fix v-if="spinShow"></Spin>
     </section>
 </template>
 <script>
 import SingleBg from 'base/singleBg'
+import { Navs } from 'assets/js/mixin'
 import BlockPic from 'base/picture'
 export default {
+    mixins: [Navs],
     data() {
         return {
-            knowledge_kind: '产品知识',
-            knowledges: []
+            spinShow: false,
+            knowledge_kind: '',
+            currentCategory: '',
+            Knowledges: []
+        }
+    },
+    watch: {
+        currentKnowledge(val) {
+            console.log(val);
+            let current = this.knowledges.find(item => item.value == val);
+            this.knowledge_kind = current.label;
+            this.currentCategory = val;
+            this.getAllPictures();
         }
     },
     methods: {
-        radioChange() {
+        radioChange(val) {
+            let tmp = this.knowledges.find(item => item.label == val);
+            this.currentCategory = tmp.value;
             this.getAllPictures();
         },
         getAllPictures() {
-            this.$http.get('api/getKnowledges').then(res => {
+            let param = {
+                typeId: this.currentCategory
+            }
+            this.spinShow = true;
+            this.$http.knowledge.knowledgeType(param).then(res => {
                 let { success, msg, data } = res;
+                this.spinShow = false;
                 if (success) {
                     if (data.length) {
-                        this.knowledges = data.map(item => {
+                        this.Knowledges = data.map(item => {
                             return {
                                 title: item.title,
-                                img: item.img,
+                                img: item.imgUrl,
                                 id: item.id
                             }
-                        })
+                        });
                     }
                 } else {
                     this.$Message.warning('当前区域工程业绩查询失败,原因: ' + msg);
@@ -52,7 +73,7 @@ export default {
         },
         currentClicked(item) {
             this.$router.push({
-                name: 'kownledgeDetail',
+                name: 'knowledgeDetail',
                 params: {
                     id: item.id
                 }
@@ -60,6 +81,11 @@ export default {
         }
     },
     mounted() {
+        // id 就是 当前案的 category
+        this.currentCategory = this.$route.params.id;
+        // 筛选 category
+        let temp = this.knowledges.find(item => item.value === this.currentCategory);
+        this.knowledge_kind = temp.label;
         this.getAllPictures();
     },
     components: {

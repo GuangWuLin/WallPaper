@@ -6,7 +6,9 @@ Vue.use(Vuex);
 const state = {
     productCenter:[],
     projects:[],
+    knowledges:[],
     currentProduct:'',
-    currentProject:''
+    currentProject:'',
+    currentKnowledge:''
 }
 export default new Vuex.Store({state, getters, mutations})

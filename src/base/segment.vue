@@ -1,13 +1,24 @@
 <template>
     <!-- 图片与文章 -->
-    <div v-html='richText'>
+    <div>
+        <h3>{{content.title}}</h3>
+        <span>{{content.date}}</span>
+        <div v-html='content.content'>
+        </div>
+
     </div>
 </template>
 <script>
 export default {
-    data() {
-        return {
-            richText: '<h1>HelloKitty!!</h1>'
+    props: {
+        content: {
+            type: Object,
+            default: function() {
+                return {
+                    title: '',
+                    content: ''
+                }
+            }
         }
     }
 }

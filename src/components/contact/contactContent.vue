@@ -2,9 +2,8 @@
     <section class="main-container">
         <div class="contact-describle">
             <span>墙纸十大品牌，无缝墙布，提花壁布，刺绣墙布</span>
-            <span>地址：四川省遂宁市射洪县太和镇</span>
-            <span>电话：13000000000</span>
-            <span>座机：0825-6688888</span>
+            <span>地址：浙江省绍兴市柯桥区钱清工业园</span>
+            <span>电话：15157573105</span>
             <img src="../../../static/img/location.jpg" alt="">
         </div>
         <div class="right-map">
@@ -17,20 +16,23 @@ export default {
     methods: {
         initMap() {
             // 构造地图对象的方法一：使用地图容器ID创建
-            var map = new AMap.Map('container');
+            var map = new AMap.Map('container', {
+                center: [120.41552, 30.116504],
+                zoom: 11
+            });
             // 构造地图对象的方法二：使用地图容器对象创建
             // var map = new AMap.Map(document.getElementById("container"));
             // 创建一个 Marker 实例：
             var marker = new AMap.Marker({
-                position: new AMap.LngLat(104.06, 30.67),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-                title: '青青子衿'
+                position: new AMap.LngLat(120.41552, 30.116504),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+                title: '丝润墙布'
             });
             // 将创建的点标记添加到已有的地图实例：
-            marker.setTitle("HelloKitty");
+            marker.setTitle("丝润墙布");
             // 设置label标签
             marker.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
                 offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
-                content: "HelloKitty"
+                content: "丝润墙布"
             });
             map.add(marker);
 

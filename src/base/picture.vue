@@ -15,12 +15,13 @@
     margin: 10px 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+
     .pic-item {
         width: 300px;
         height: 300px;
         box-sizing: border-box;
-        margin: 10px 0;
-        flex-grow: 1;
+        margin: 10px 0; // flex-grow: 1;
         .pic {
             border-radius: 8px;
             overflow: hidden;

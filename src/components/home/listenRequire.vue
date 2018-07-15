@@ -6,7 +6,7 @@
             <div class="our-need">
                 <span class="sub-title">关于我们</span>
                 <p name='about'>
-                    青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说 青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说 青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说 青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说
+                    {{requires.about}}
                 </p>
                 <Button class="check-detail transButton" @click="go2About">查看详情</Button>
             </div>
@@ -14,9 +14,9 @@
             <div class="our-need">
                 <span class="sub-title">我们的优势</span>
                 <p name='advantage'>
-                    青青子衿悠悠我心情况就是能吃sasksassd啥都没喝奶茶拿不出手可是就是觉得爸爸说
+                    {{requires.describe}}
                 </p>
-                <our-advantage></our-advantage>
+                <our-advantage :list='requires.advantage'></our-advantage>
             </div>
             <!-- 第三区 -->
             <div class="our-need">
@@ -130,7 +130,7 @@
 <script>
 import OurAdvantage from 'base/collapse'
 export default {
-    props: ['standards'],
+    props: ['requires'],
     components: {
         OurAdvantage
     },
