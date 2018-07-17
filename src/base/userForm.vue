@@ -11,6 +11,14 @@
         </FormItem>
     </Form>
 </template>
+<style lang="less">
+.ivu-modal-header p,
+.ivu-form .ivu-form-item-label,
+.ivu-modal-header-inner {
+    font-size: 20px;
+}
+</style>
+
 <script>
 import global from 'assets/js/global'
 export default {
@@ -52,6 +60,8 @@ export default {
                 let { success, data, msg } = res;
                 if (success) {
                     this.$Message.success('信息提交成功!');
+                    // 成功填写用户表 标记
+                    sessionStorage.setItem('signOK', true);
                 } else {
                     this.$Message.warning('用户需求提交失败，原因： ' + msg);
                 }

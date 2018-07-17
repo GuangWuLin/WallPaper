@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="big-background">
-            <img :src="img" alt="">
+            <img v-lazy="img" alt="">
         </div>
         <Spin size="large" fix v-if="spinShow"></Spin>
     </div>

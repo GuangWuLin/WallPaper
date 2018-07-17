@@ -20,21 +20,9 @@ export  const request = {
         getCarousel:() => {
             return axios.get(`${baseUrl}/getCarousel`)
         },
-         // 公司理念
-        idea:() => {
-            return axios.get(`${baseUrl}/idea`)
-        },
-          // 成功案例
-        list:() => {
-            return axios.get(`${baseUrl}/case/list`)
-        },
-          // 成功案例详情
-        get:param => {
-            return axios.get(`${baseUrl}/case/get`,param)
-        },
         //  倾听客户的需求
-        getAdvantage:param => {
-            return axios.get(`${baseUrl}/getAdvantage`,param)
+        getIndex:() => {
+            return axios.get(`${baseUrl}/getIndex`)
         }
     },
     // 专卖店形象

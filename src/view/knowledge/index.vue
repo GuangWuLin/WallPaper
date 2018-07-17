@@ -53,6 +53,7 @@ export default {
                 typeId: this.currentCategory
             }
             this.spinShow = true;
+            this.Knowledges = [];
             this.$http.knowledge.knowledgeType(param).then(res => {
                 let { success, msg, data } = res;
                 this.spinShow = false;

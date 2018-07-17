@@ -16,10 +16,7 @@
         width: 100%;
         .who-pic {
             width: 100%;
-            height: 200px; // img {
-            //     height: 200px;
-            //     width: 100%;
-            // }
+            height: 200px;
         }
         .who-describle {
             .who-sub-title {
@@ -45,20 +42,16 @@
 
 @media screen and (min-width:768px) {
     .who {
-        // width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         .who-pic {
-            width: 100%;
-            height: 200px; // flex: 1;
+            width: 50%;
+            height: 200px;
             padding: 10px;
-            margin-top: 100px; // img {
-            //     width: 100%;
-            // }
+            margin-top: 100px;
         }
         .who-describle {
-            // flex: 1;
             span {
                 font-size: 30px;
                 font-weight: bold;
@@ -92,7 +85,7 @@ export default {
     },
     methods: {
         getCompanyInfo() {
-            this.introduction = {};
+            this.introduction = Object.create(null);
             this.$http.about.introduction().then(res => {
                 let { success, data, msg } = res;
                 if (success) {

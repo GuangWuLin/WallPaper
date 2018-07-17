@@ -23,6 +23,10 @@
                 <Icon type="ios-telephone"></Icon>
                 <span class="menu-title">联系我们</span>
                 </MenuItem>
+                <MenuItem name="news">
+                <Icon type="social-twitter"></Icon>
+                <span class="menu-title">最新资讯</span>
+                </MenuItem>
             </div>
             <MenuItem v-else :name="singleOption" class="right-select">
             <Dropdown @on-click='tellMe' trigger='hover'>
@@ -58,10 +62,7 @@
                 </DropdownMenu>
             </Dropdown>
             </MenuItem>
-            <MenuItem name="news">
-            <Icon type="social-twitter"></Icon>
-            <span class="menu-title">最新资讯</span>
-            </MenuItem>
+
             <Submenu name="achievement">
                 <template slot="title">
                     <Icon type="social-buffer"></Icon>
@@ -96,13 +97,17 @@
     </Affix>
 </template>
 <style lang="less" scoped>
+.menu-title {
+    font-size: 20px;
+}
+
 .right-select {
     position: absolute;
     right: -10px;
     top: 0px;
-    margin-left: 2px; // width: 100px;
+    margin-left: 2px;
     a {
-        color: #fff;
+        color: #000;
     }
 }
 </style>
@@ -112,7 +117,7 @@ export default {
     mixins: [Navs],
     data() {
         return {
-            theme: 'primary',
+            theme: 'light',
             singleOption: '',
             isGiantScreen: false
             // projects: []
@@ -218,6 +223,7 @@ export default {
     mounted() {
         let w = document.documentElement.clientWidth;
         w <= 768 ? this.isGiantScreen = false : this.isGiantScreen = true;
+        console.log(w, this.isGiantScreen)
         this.getProducts();
         this.getProjects();
         this.getKnowledges();

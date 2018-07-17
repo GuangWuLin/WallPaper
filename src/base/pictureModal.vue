@@ -1,16 +1,22 @@
 <template>
-    <section class="pic-container">
-        <div v-for="(item,index) in pictures" :key="index" class="pic-item" @click="currentClick(item)">
-            <div class="pic">
-                <a href="javascrip:;"><img v-lazy="item.img" alt=""></a>
-                <a href="javascrip:;">{{item.title}}</a>
+    <section>
+        <div class="pic-container" v-if="pictures.length">
+            <div v-for="(item,index) in pictures" :key="index" class="pic-item" @click="currentClick(item)">
+                <div class="pic">
+                    <a href="javascrip:;"><img v-lazy="item.img" alt=""></a>
+                    <a href="javascrip:;">{{item.title}}</a>
+                </div>
             </div>
+            <Modal v-model="currentSelected" width="660" :title='currentObj.title'>
+                <div style="text-align:center">
+                    <img v-lazy="currentObj.img" style="width:100%;height:100%;" alt="">
+                </div>
+            </Modal>
         </div>
-        <Modal v-model="currentSelected" width="660" :title='currentObj.title'>
-            <div style="text-align:center">
-                <img :src="currentObj.img" style="width:100%;height:100%;" alt="">
-            </div>
-        </Modal>
+        <div v-else>
+            <img src="../../static/img/empty-box.png" alt="">
+            <span style="display:inline-block;width:100%;text-align:center;">暂时没有数据</span>
+        </div>
     </section>
 </template>
 <script>

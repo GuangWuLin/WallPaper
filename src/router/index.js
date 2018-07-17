@@ -147,6 +147,7 @@ const router = new Router({
     // 工程业绩
     {
       path:'/project/:id',
+      // path:'/project',      
       name:'project',
       component: Project
     },
@@ -159,6 +160,7 @@ const router = new Router({
     // 知识园地
     {
       path:'/knowledge/:id',
+      // path:'/knowledge/:id',
       name:'knowledge',
       component: Knowledge
     },

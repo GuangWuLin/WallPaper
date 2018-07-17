@@ -4,7 +4,7 @@
         <!-- 单个 cell 的列表 -->
         <div class="list-card" v-for='(item,index) in list' :key="index" @click="toDetail(item)">
             <!-- 左侧图片 -->
-            <img :src="item.img" alt="">
+            <img v-lazy="item.img" alt="">
             <!-- 右侧描述 -->
             <div class="list-card-right">
                 <span class="list-title">{{item.title}}</span>

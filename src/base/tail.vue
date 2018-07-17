@@ -15,8 +15,8 @@
             </router-link>
         </div>
         <div class="foot-bottom">
-            <span>地址：四川省遂宁市射洪县</span>
-            <span>联系电话：13000000000</span><br/>
+            <span>地址：浙江省绍兴市柯桥区钱清工业园</span>
+            <span>联系电话：15157573105</span><br/>
             <span>CopyRight©️2018</span>
         </div>
     </section>

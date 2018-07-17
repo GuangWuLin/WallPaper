@@ -1,10 +1,10 @@
 <template>
     <section class="wrap">
         <contents @popupForm='popupForm'></contents>
-        <Modal v-model="formShow" title="填写信息" @on-ok='asyncOK' @on-cancel='cancel'>
+        <Modal v-model="formShow" title="填写信息加入丝润强布" @on-ok='asyncOK' @on-cancel='cancel'>
             <user-form ref='userForm' @invalidate='invalidate'></user-form>
         </Modal>
-        <footers :footers='footers' :titleInfo='titleInfo'></footers>
+        <footers></footers>
     </section>
 </template>
 <style lang="less" scoped>
@@ -14,7 +14,7 @@
 }
 </style>
 <script>
-import Contents from 'components/home/content'
+import Contents from 'components/home/new-content'
 import Footers from 'components/home/footer'
 import UserForm from 'base/userForm'
 export default {
@@ -25,38 +25,7 @@ export default {
     },
     data() {
         return {
-            formShow: true,
-            titleInfo: {
-                title: '专业6步，步步为营',
-                subTitle: '把一件事做到极致，用工匠精神激励前行'
-            },
-            footers: [
-                {
-                    title: '客户提出需求',
-                    type: 'chatbox-working',
-                    size: 'home'
-                },
-                {
-                    title: '制定设计方案',
-                    type: 'document-text',
-                    size: 'home'
-                },
-                {
-                    title: '双方签订协议',
-                    type: 'clipboard',
-                    size: 'home'
-                },
-                {
-                    title: '展示与验收',
-                    type: 'search',
-                    size: 'home'
-                },
-                {
-                    title: '后期维护',
-                    type: 'wrench',
-                    size: 'home'
-                }
-            ]
+            formShow: false
         }
     },
     methods: {
@@ -79,6 +48,14 @@ export default {
         },
         popupForm() {
             this.formShow = true;
+        }
+    },
+    mounted() {
+        let signOk = sessionStorage.getItem('signOK');
+        if (!signOk) {
+            this.formShow = true;
+        } else {
+            this.formShow = false;
         }
     }
 }
