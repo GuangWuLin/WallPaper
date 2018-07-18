@@ -12,7 +12,7 @@ import 'lib-flexible';
 //全局引入api接口
 import {request} from 'api/api'
 Vue.use(VueLazyload, {
-  error:'../static/who-img.jpg',
+  error:'../static/img/who-img.jpg',
   loading: require('../static/img/32.jpeg')
 })
 Vue.prototype.$http = request;

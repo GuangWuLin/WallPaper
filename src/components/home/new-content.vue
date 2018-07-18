@@ -14,17 +14,35 @@
                 <span class="en">PRODUCT</span>
                 产品中心
             </div>
-            <Carousel v-model="value1" loop arrow='always' dots='none'>
-                <CarouselItem v-for="(item,index) in products" class="carousel" :key="index" @click.native='productDetail(item)'>
-                    <div class="demo-carousel ">
-                        <img :src="item.imgUrl" alt="">
-                        <div class="carousel-title">{{item.describe}}</div>
+            <div class="product-container">
+                <div v-for="(item,index) in products" class="product-content" :key="index" @click.native='productDetail(item)'>
+                    <div class="product-item">
+                        <img class="img-content" v-lazy="item.imgUrl" alt="">
+                        <div class="product-title">{{item.describe}}</div>
                     </div>
-                </CarouselItem>
-            </Carousel>
+                </div>
+            </div>
             <div class="more" @click='productMore'>更多</div>
         </div>
         <!-- 工程业绩 -->
+        <div class="project">
+            <div class='index-title'>
+                <span class="en">ENGINEERING PERFORMANCE</span>
+                工程业绩
+            </div>
+            <div class="project-line">
+                <div v-for="(item,index) in projects" :key="index">
+                    <div>
+                        <img class="img-content" v-lazy="item.imgUrl" alt="" @click='projectDetail(item)'>
+                        <div style="display:inline-block;height:400px;vertical-align:top;">
+                            <span class="project-title" @click="projectDetail(item)">{{item.title}}</span>
+                            <p>{{item.describe}}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <!-- 公司简介 -->
         <div class="introduction">
             <div class="left-content">
@@ -33,7 +51,7 @@
                     宣传片
                 </div>
                 <div class="left-img">
-                    <img :src="introduction.imgUrl" alt="">
+                    <img class="img-content" v-lazy="introduction.imgUrl" alt="">
                 </div>
             </div>
             <div class="right-content">
@@ -55,53 +73,55 @@
                 <span class="en">QUALIFICATION HONOR</span>
                 资质荣誉
             </div>
-            <Carousel autoplay v-model="value2" loop arrow='never'>
-                <CarouselItem v-for="(item,index) in honors" class="carousel" :key="index">
-                    <div class="demo-carousel">
-                        <img :src="item.imgUrl" alt="">
+            <div class="honor-container">
+                <div v-for="(item,index) in honors" class="honor-content" :key="index">
+                    <div class="honor-item">
+                        <img class="img-content" v-lazy="item.imgUrl" alt="">
                     </div>
-                </CarouselItem>
-            </Carousel>
+                </div>
+            </div>
+            <div class="more" @click='honorMore'>更多</div>
         </div>
         <!-- 新闻动态 -->
-        <div class="news">
-            <div class='index-title first-section'>
-                <span class="en">NEWS <br/> INFORMATION</span>
-                新闻动态
-            </div>
-            <div v-for='(item,index) in news' :key='index' class="news-item">
-                <div class="news-left">{{item.date}}</div>
-                <div class="news-middle">
-                    <div class="news-title" @click='newsDetail(item)'>{{item.title}}</div>
-                    <div>{{item.abstract}}</div>
+        <div class="bg62">
+            <div class="news">
+                <div class='index-title first-section'>
+                    <span class="en">NEWS <br/> INFORMATION</span>
+                    新闻动态
                 </div>
-                <div class="news-right">
-                    <img :src="item.imgUrl" alt="">
-                </div>
-            </div>
-        </div>
-        <!-- 知识园地 -->
-        <div class="knowledge">
-            <div class='index-title'>
-                <span class="en">KNOWLEDGE FIELD</span>
-                知识园地
-            </div>
-            <Carousel autoplay v-model="value3" loop arrow='never'>
-                <CarouselItem v-for="(item,index) in knowledges" class="carousel" :key="index" @click.native='knowledgeDetail(item)'>
-                    <div class="demo-carousel">
-                        <img :src="item.imgUrl" alt="">
-                        <div class="carousel-title">{{item.title}}</div>
+                <div v-for='(item,index) in news' :key='index' class="news-item">
+                    <div class="news-left">{{item.date}}</div>
+                    <div class="news-middle">
+                        <div class="news-title" @click='newsDetail(item)'>{{item.title}}</div>
+                        <div class="news-content">{{item.abstract}}</div>
                     </div>
-                </CarouselItem>
-            </Carousel>
-
+                    <div class="news-right">
+                        <img class="img-content" v-lazy="item.imgUrl" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- 知识园地 -->
+            <div class="knowledge">
+                <div class='index-title'>
+                    <span class="en">KNOWLEDGE FIELD</span>
+                    知识园地
+                </div>
+                <div class="knowledge-container">
+                    <div v-for="(item,index) in knowledges" class="knowledge-content" :key="index" @click='knowledgeDetail(item)'>
+                        <div class="knowledge-item">
+                            <img class="img-content" v-lazy="item.imgUrl" alt="">
+                            <div class="knowledge-title" @click='knowledgeDetail(item)'>{{item.title}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="more" @click='knowledgeMore'>更多</div>
+            </div>
         </div>
         <Spin size="large" fix v-if="spinShow"></Spin>
     </section>
 </template>
 <script>
 import BlockShow from 'base/blockShow'
-import global from 'assets/js/global'
 export default {
     components: {
         BlockShow
@@ -109,15 +129,13 @@ export default {
     data() {
         return {
             value: 1,
-            value1: 1,
-            value2: 1,
-            value3: 1,
             spinShow: false, // 是否加载中
             carousels: [], // 轮播图
             products: [], // 产品展示
             honors: [], // 荣誉资质
             knowledges: [], // 知识园地
             news: [], // 最新资讯
+            projects: [], // 工程业绩
             // 公司简介
             introduction: {
 
@@ -145,6 +163,7 @@ export default {
             this.honors = [];
             this.knowledges = [];
             this.news = [];
+            this.projects = [];
             this.introduction = {};
             this.spinShow = true;
             this.$http.home.getIndex().then(res => {
@@ -152,9 +171,22 @@ export default {
                 this.spinShow = false;
                 if (success) {
                     if (typeof data === 'object' && Object.keys(data).length) {
-                        this.products = data.productType;
-                        this.honors = data.honorList;
-                        this.knowledges = data.knowledges;
+                        this.projects = data.projectList;
+                        if (data.productType.length >= 4) {
+                            this.products = data.productType.slice(0, 4);
+                        } else {
+                            this.products = data.productType
+                        }
+                        if (data.honorList.length >= 5) {
+                            this.honors = data.honorList.slice(0, 5);
+                        } else {
+                            this.honors = data.honorList
+                        }
+                        if (data.knowledges.length >= 3) {
+                            this.knowledges = data.knowledges.slice(0, 3);
+                        } else {
+                            this.knowledges = data.knowledges
+                        }
                         this.news = data.newsList;
                         this.introduction = data.introduction;
                     }
@@ -172,12 +204,21 @@ export default {
                 }
             })
         },
+        honorMore() {
+            this.$router.push({
+                path: '/about/honor'
+            })
+        },
+        knowledgeMore() {
+            this.$router.push({
+                path: '/knowledge/product'
+            })
+        },
         // 跳转到当前产品的详情
         productDetail(item) {
             console.log(item);
         },
         knowledgeDetail(item) {
-            console.log(item)
             this.$router.push({
                 name: 'knowledgeDetail',
                 params: {
@@ -186,11 +227,18 @@ export default {
             })
         },
         newsDetail(item) {
-            console.log(item)
             this.$router.push({
                 name: 'newsDetail',
                 params: {
                     param: item
+                }
+            })
+        },
+        projectDetail(item) {
+            this.$router.push({
+                name: 'projectDetail',
+                params: {
+                    id: item.id
                 }
             })
         },
@@ -240,6 +288,56 @@ export default {
             display: block;
         }
     }
+    .product {
+        .product-container {
+            display: flex;
+            flex-flow: row nowrap;
+            .product-content {
+                margin: 10px;
+                flex: 1;
+                height: 520px;
+                cursor: pointer;
+                .product-title {
+                    opacity: 0;
+                    transition: all .5s linear;
+                }
+                &:hover .product-title {
+                    background: #c3bcbc;
+                    height: 50px;
+                    color: #fff;
+                    width: 100%;
+                    transform: translateY(-8px);
+                    opacity: .8;
+                }
+                img {
+                    width: 480px;
+                    height: 360px;
+                }
+            }
+        }
+    }
+    .project {
+        display: flex;
+        flex-direction: column;
+        background: url('../../../static/img/img-45.png');
+        .project-line {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
+            .project-title {
+                display: block;
+                &:hover {
+                    color: #337ab7;
+                    cursor: pointer;
+                }
+            }
+            img {
+                cursor: pointer;
+                width: 640px;
+                height: 360px;
+            }
+        }
+    }
     .introduction {
         display: flex;
         flex-flow: row nowrap;
@@ -283,22 +381,42 @@ export default {
     .honor {
         display: flex;
         flex-direction: column;
+        background: url('../../../static/img/img-5.png');
+        padding: 10px;
+        .honor-container {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
+            box-sizing: border-box;
+            .honor-content {
+                margin: 10px;
+                flex: 1;
+                img {
+                    width: 300px;
+                    height: 400px;
+                }
+            }
+        }
+    }
+    .bg62 {
+        background: url(../../../static/img/img-62.png) no-repeat;
     }
     .news {
         display: flex;
         flex-flow: row wrap;
         padding: 10px 20px;
-        background: url(../../../static/img/img-62.png) no-repeat;
+
         .first-section {
             width: 920px;
         }
         .news-item {
             display: flex;
             box-sizing: border-box;
-            flex-direction: row; // width: 1200px;
+            flex-direction: row;
             margin: 20px;
             .news-left {
-                width: 200px;
+                font-size: 20px;
+                width: 130px;
                 height: 400px;
             }
             .news-middle {
@@ -306,22 +424,53 @@ export default {
                 height: 400px;
                 .news-title {
                     cursor: pointer;
+                    color: #ccc;
                     &:hover {
                         color: #337ab7;
                     }
                 }
+                .news-content {
+                    font-size: 20px;
+                    text-align: left;
+                    padding-right: 5px;
+                    word-break: break-all;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 8;
+                    overflow: hidden;
+                }
             }
             .news-right {
-                width: 400px;
+                width: 480px;
                 img {
-                    width: 400px;
-                    height: 400px;
+                    width: 480px;
+                    height: 360px;
                 }
             }
         }
     }
+    .knowledge-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        .knowledge-content {
+            margin: 10px;
+            flex: 1;
+            cursor: pointer;
+            img {
+                width: 640px;
+                height: 360px;
+            }
+        }
+        .knowledge-title:hover {
+            color: #337ab7;
+            cursor: pointer;
+        }
+    }
     .more {
         cursor: pointer;
+        margin-top: 10px;
         display: inline-block;
         padding: 5px 40px;
         background: #c3bcbc;
@@ -337,21 +486,19 @@ export default {
         cursor: pointer;
         .carousel-title {
             position: absolute;
-            bottom: 8px;
+            opacity: 0;
+        }
+        &:hover .carousel-title {
+            background: #c3bcbc;
+            height: 50px;
+            color: #fff; // bottom: 8px;
             width: 100%;
-            background: #666;
-            opacity: .5;
-            color: #fff;
-            &:hover {
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-                color: #fff;
-                opacity: 1;
-                filter: brightness(1.2);
-            }
+            transform: translateY(-8px);
+            opacity: .8;
         }
         img {
-            height: 600px;
             width: 100%;
+            height: 540px;
         }
     }
 }

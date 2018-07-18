@@ -73,7 +73,7 @@ export default {
   }
   .content {
     margin-top: 60px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
   }
 }
 

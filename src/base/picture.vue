@@ -63,13 +63,11 @@
                 left: 0;
                 top: 0;
                 width: 100%;
-                height: 100%;
-                filter: blur(2px);
+                height: 100%; // filter: blur(2px);
                 transition: all .7s linear;
             }
             img:hover {
-                transform: scale(1.1);
-                filter: blur(0);
+                transform: scale(1.1); // filter: blur(0);
             }
         }
         &::after {
@@ -96,8 +94,7 @@
                 overflow: hidden;
             }
             img {
-                transform: scale(1.1);
-                filter: blur(0);
+                transform: scale(1.1); // filter: blur(0);
             }
             a:last-child {
                 bottom: 50%;
@@ -113,7 +110,6 @@
 </style>
 
 <script>
-import global from 'assets/js/global'
 export default {
     props: ['pictures'],
     data() {

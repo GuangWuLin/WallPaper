@@ -20,7 +20,6 @@
     </section>
 </template>
 <script>
-import global from 'assets/js/global'
 export default {
     props: ['pictures'],
     data() {
@@ -89,8 +88,7 @@ export default {
                 left: 0;
                 top: 0;
                 width: 100%;
-                height: 100%;
-                filter: blur(2px);
+                height: 100%; // filter: blur(2px);
                 transition: all .7s linear;
             }
         }
@@ -118,8 +116,7 @@ export default {
                 overflow: hidden;
             }
             img {
-                transform: scale(1.1);
-                filter: blur(0);
+                transform: scale(1.1); // filter: blur(0);
             }
             a:last-child {
                 bottom: 50%;
