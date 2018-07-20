@@ -35,7 +35,6 @@ export default {
     },
     watch: {
         currentKnowledge(val) {
-            console.log(val);
             let current = this.knowledges.find(item => item.value == val);
             this.knowledge_kind = current.label;
             this.currentCategory = val;

@@ -81,6 +81,7 @@ export default {
     mounted() {
         // id 就是 当前案的 category
         this.currentCategory = this.$route.params.id;
+        console.log(this.$route)
         // 筛选 category
         let temp = this.productCenter.find(item => item.value === this.currentCategory);
         this.pro_value = temp.label;

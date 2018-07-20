@@ -15,20 +15,18 @@
             </router-link>
         </div>
         <div class="foot-bottom">
-            <span>地址：浙江省绍兴市柯桥区钱清工业园</span>
-            <span>联系电话：15157573105</span><br/>
-            <span>CopyRight©️2018</span>
+            <span>地址：{{address}}</span>
+            <span>联系电话：{{tel}}</span><br/>
+            <span>{{copyRight}}</span>
         </div>
     </section>
 </template>
 <style lang="less" scoped>
 .footer-info {
-    background: #1a1c20 none repeat center top;
-    height: 100px;
+    background: #1a1c20 none repeat center top; // height: 100px;
     .footer-block {
         height: 50px;
-        line-height: 50px;
-        padding: 20px auto;
+        line-height: 50px; // padding: 20px auto;
         display: flex;
         flex-flow: row nowrap;
         justify-content: center;
@@ -55,3 +53,16 @@
     }
 }
 </style>
+<script>
+import global from 'assets/js/global'
+export default {
+    data() {
+        return {
+            address: global.address,
+            tel: global.tel,
+            copyRight: global.copyRight
+        }
+    }
+}
+</script>
+

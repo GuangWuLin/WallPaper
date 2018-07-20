@@ -17,7 +17,7 @@
 @media screen and (min-width:768px) {
     div {
         width: 100%;
-        height: 300px;
+        height: 500px;
     }
 }
 </style>

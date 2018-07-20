@@ -21,40 +21,14 @@
                 <router-view style="width:100%;"></router-view>
             </keep-alive>
         </div>
-        <!-- 第三区 装逼 -->
-        <footers :footers='footers' :titleInfo='titleInfo'></footers>
     </section>
 </template>
 <script>
-import Footers from 'components/home/footer'
 export default {
-    components: {
-        Footers
-    },
     data() {
         return {
             about_us: '',
-            titleInfo: {
-                title: '匠心独运',
-                subTitle: '用专业表达专业'
-            },
-            footers: [
-                {
-                    title: '专注',
-                    type: 'navigate',
-                    size: 'about'
-                },
-                {
-                    title: '创新',
-                    type: 'ios-lightbulb-outline',
-                    size: 'about'
-                },
-                {
-                    title: '品质',
-                    type: 'trophy',
-                    size: 'about'
-                }
-            ]
+
         }
     },
     methods: {
@@ -105,18 +79,19 @@ export default {
                 display: block;
             }
             span:first-child {
-                font-size: 40px;
+                font-size: 50px;
                 font-weight: bold;
                 margin-bottom: 20px;
             }
             span:last-child {
-                font-size: 20px;
+                font-size: 30px;
             }
         }
     }
     .router_view {
         margin: 10px auto;
         width: 100%;
+        overflow: hidden;
         &::after {
             content: '';
             display: inline;

@@ -2,7 +2,7 @@
     <section class="shop-content">
         <single-bg></single-bg>
         <div class="pro-select">
-            <RadioGroup v-model="shop_image" @on-change='radioChange'>
+            <RadioGroup v-model="shop_image">
                 <Radio label="专卖店形象">
                     <span class="pro-span">专卖店形象</span>
                 </Radio>
@@ -23,9 +23,6 @@ export default {
         }
     },
     methods: {
-        radioChange() {
-
-        },
         getAllPictures() {
             this.$http.shop.agency().then(res => {
                 let { success, msg, data } = res;
@@ -45,7 +42,6 @@ export default {
             })
         },
         currentClicked(item) {
-            console.log(item)
             this.$router.push({
                 name: 'shopDetail',
                 params: {
@@ -65,7 +61,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .shop-content {
-    margin-bottom: 100px;
+    // margin-bottom: 100px;
     .pro-select {
         margin: 20px;
     }

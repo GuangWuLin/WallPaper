@@ -15,7 +15,7 @@
                 产品中心
             </div>
             <div class="product-container">
-                <div v-for="(item,index) in products" class="product-content" :key="index" @click.native='productDetail(item)'>
+                <div v-for="(item,index) in products" class="product-content" :key="index" @click='productDetail(item)'>
                     <div class="product-item">
                         <img class="img-content" v-lazy="item.imgUrl" alt="">
                         <div class="product-title">{{item.describe}}</div>
@@ -32,9 +32,9 @@
             </div>
             <div class="project-line">
                 <div v-for="(item,index) in projects" :key="index">
-                    <div>
+                    <div class="project-item">
                         <img class="img-content" v-lazy="item.imgUrl" alt="" @click='projectDetail(item)'>
-                        <div style="display:inline-block;height:400px;vertical-align:top;">
+                        <div class='project-article'>
                             <span class="project-title" @click="projectDetail(item)">{{item.title}}</span>
                             <p>{{item.describe}}</p>
                         </div>
@@ -48,7 +48,7 @@
             <div class="left-content">
                 <div class='index-title product-title'>
                     <span class="en">TRAILER</span>
-                    宣传片
+                    宣传画
                 </div>
                 <div class="left-img">
                     <img class="img-content" v-lazy="introduction.imgUrl" alt="">
@@ -90,7 +90,7 @@
                     新闻动态
                 </div>
                 <div v-for='(item,index) in news' :key='index' class="news-item">
-                    <div class="news-left">{{item.date}}</div>
+                    <div class="news-date">{{item.date}}</div>
                     <div class="news-middle">
                         <div class="news-title" @click='newsDetail(item)'>{{item.title}}</div>
                         <div class="news-content">{{item.abstract}}</div>
@@ -117,6 +117,11 @@
                 <div class="more" @click='knowledgeMore'>更多</div>
             </div>
         </div>
+        <Modal v-model="currentSelected" width="80" :title='currentObj.describe'>
+            <div style="text-align:center">
+                <img v-lazy="currentObj.imgUrl" style="width:100%;height:100%;" alt="">
+            </div>
+        </Modal>
         <Spin size="large" fix v-if="spinShow"></Spin>
     </section>
 </template>
@@ -129,6 +134,11 @@ export default {
     data() {
         return {
             value: 1,
+            currentObj: {
+                describe: '',
+                imgUrl: ''
+            },
+            currentSelected: false,
             spinShow: false, // 是否加载中
             carousels: [], // 轮播图
             products: [], // 产品展示
@@ -216,7 +226,9 @@ export default {
         },
         // 跳转到当前产品的详情
         productDetail(item) {
-            console.log(item);
+            this.currentSelected = true;
+            this.currentObj = item;
+            console.info(this.currentObj);
         },
         knowledgeDetail(item) {
             this.$router.push({
@@ -255,39 +267,465 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.index-title {
+    color: #666666;
+    font-size: 30px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    text-align: center;
+    .en {
+        font-size: 40px;
+        font-family: Impact;
+        color: #338de9;
+        display: block;
+    }
+}
+
+// 更多
+.more {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 5px 40px;
+    background: #1ebbf0;
+    border-radius: 2px;
+}
+
 @media screen and (max-width:375px) {
+    // 轮播图
     .demo-carousel {
+        position: relative;
+        cursor: pointer;
+        .carousel-title {
+            position: absolute;
+            opacity: 0;
+        }
+        &:hover .carousel-title {
+            background: #c3bcbc;
+            height: 50px;
+            color: #fff;
+            width: 100%;
+            transform: translateY(-8px);
+            opacity: .8;
+        }
         img {
+            width: 100%;
             height: 300px;
+        }
+    } // 产品中心
+    .product {
+        .product-container {
+            display: flex;
+            flex-direction: column;
+            .product-content {
+                position: relative;
+                margin: 10px 0;
+                flex: 1;
+                height: 420px;
+                cursor: pointer;
+                .product-title {
+                    background: #c3bcbc;
+                    position: absolute;
+                    bottom: 0;
+                    height: 80px;
+                    line-height: 80px;
+                    font-size: 40px;
+                    color: #fff;
+                    width: 100%;
+                }
+                img {
+                    width: 100%;
+                    height: 420px;
+                }
+            }
+        }
+    }
+    .project {
+        display: flex;
+        flex-direction: column;
+        .index-title {
             width: 100%;
+            text-align: center;
+        }
+        .project-line {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px; // justify-content: space-around;
+            .project-item {
+                width: 100%;
+                .project-article {
+                    .project-title {
+                        display: block;
+                        font-weight: bold;
+                        &:hover {
+                            color: #337ab7;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                img {
+                    display: block;
+                    cursor: pointer;
+                    width: 100%;
+                    height: 360px;
+                }
+            }
+        }
+    }
+    .introduction {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: url(../../../static/img/img-55.png) no-repeat;
+        color: #fff;
+        margin-top: 10px;
+        .index-title {
+            .en {
+                color: #fff;
+            }
+            font-weight: bold;
+        }
+        .product-title {
+            color: #fff;
+        }
+        .left-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .left-img {
+                width: 100%;
+                img {
+                    width: 100%;
+                    height: 400px;
+                }
+            }
+        }
+        .right-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .forward {
+                background: url(../../../static/img/img-70.png) no-repeat;
+                width: 50px;
+                height: 50px;
+                display: block;
+                margin-top: 30px;
+                &:hover {
+                    background: url(../../../static/img/img-59.png) no-repeat;
+                }
+            }
+        }
+    }
+    .honor {
+        display: flex;
+        flex-direction: column;
+        background: url('../../../static/img/img-5.png');
+        padding: 10px;
+        .honor-container {
+            display: flex;
+            flex-flow: row wrap;
+            width: 100%;
+            .honor-content {
+                flex: 1;
+                margin: 10px;
+                img {
+                    width: 300px;
+                    height: 400px;
+                }
+            }
+        }
+        .more {
+            color: #fff;
+        }
+    }
+    .bg62 {
+        background: url(../../../static/img/img-62.png) no-repeat;
+    }
+    .news {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0px;
+        .first-section {
+            width: 100%;
+        }
+        .news-item {
+            margin: 20px 0;
+            .news-date {
+                display: inline-block;
+                color: #666;
+                font-size: 20px;
+                width: 100%;
+                text-align: center;
+            }
+            .news-middle {
+                width: 100%;
+                .news-title {
+                    display: inline-block;
+                    color: #000;
+                    &:hover {
+                        color: #337ab7;
+                    }
+                }
+                .news-content {
+                    font-size: 20px;
+                    padding: 10px;
+                    text-align: left;
+                    word-break: break-all;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 8;
+                    overflow: hidden;
+                }
+            }
+            .news-right {
+                img {
+                    width: 100%;
+                    height: 360px;
+                }
+            }
+        }
+    }
+    .knowledge {
+        .knowledge-container {
+            display: flex;
+            flex-direction: column;
+            .knowledge-content {
+                margin-bottom: 10px;
+                flex: 1;
+                img {
+                    width: 100%;
+                    height: 360px;
+                }
+            }
+            .knowledge-title:hover {
+                color: #337ab7;
+            }
+        }
+        .more {
+            color: #fff;
+            margin-bottom: 10px;
         }
     }
 }
 
-@media screen and (min-width: 376px) and (max-width: 767px) {
+@media screen and (min-width: 376px) and (max-width: 999px) {
     .demo-carousel {
-        img {
-            height: 400px;
+        position: relative;
+        cursor: pointer;
+        .carousel-title {
+            position: absolute;
+            opacity: 0;
+        }
+        &:hover .carousel-title {
+            background: #c3bcbc;
+            height: 50px;
+            color: #fff;
             width: 100%;
+            transform: translateY(-8px);
+            opacity: .8;
+        }
+        img {
+            width: 100%;
+            height: 400px;
+        }
+    }
+    .product {
+        .product-container {
+            display: flex;
+            flex-direction: column;
+            .product-content {
+                position: relative;
+                margin: 10px 0;
+                flex: 1;
+                height: 420px;
+                cursor: pointer;
+                .product-title {
+                    background: #c3bcbc;
+                    position: absolute;
+                    bottom: 0;
+                    height: 80px;
+                    line-height: 80px;
+                    font-size: 40px;
+                    color: #fff;
+                    width: 100%;
+                }
+                img {
+                    width: 100%;
+                    height: 420px;
+                }
+            }
+        }
+    }
+    .project {
+        display: flex;
+        flex-direction: column;
+        .index-title {
+            width: 100%;
+            text-align: center;
+        }
+        .project-line {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px; // justify-content: space-around;
+            .project-item {
+                width: 100%;
+                .project-article {
+                    .project-title {
+                        display: block;
+                        font-weight: bold;
+                        &:hover {
+                            color: #337ab7;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                img {
+                    display: block;
+                    cursor: pointer;
+                    width: 100%;
+                    height: 360px;
+                }
+            }
+        }
+    }
+    .introduction {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: url(../../../static/img/img-55.png) no-repeat;
+        color: #fff;
+        margin-top: 10px;
+        .index-title {
+            .en {
+                color: #fff;
+            }
+            font-weight: bold;
+        }
+        .product-title {
+            color: #fff;
+        }
+        .left-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .left-img {
+                width: 100%;
+                img {
+                    width: 100%;
+                    height: 400px;
+                }
+            }
+        }
+        .right-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .forward {
+                background: url(../../../static/img/img-70.png) no-repeat;
+                width: 50px;
+                height: 50px;
+                display: block;
+                margin-top: 30px;
+                &:hover {
+                    background: url(../../../static/img/img-59.png) no-repeat;
+                }
+            }
+        }
+    }
+    .honor {
+        display: flex;
+        flex-direction: column;
+        background: url('../../../static/img/img-5.png');
+        padding: 10px;
+        .honor-container {
+            display: flex;
+            flex-flow: row wrap;
+            width: 100%;
+            .honor-content {
+                margin: 10px;
+                flex: 1;
+                img {
+                    width: 300px;
+                    height: 400px;
+                }
+            }
+        }
+        .more {
+            color: #fff;
+        }
+    }
+    .bg62 {
+        background: url(../../../static/img/img-62.png) no-repeat;
+    }
+    .news {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0px;
+        .first-section {
+            width: 100%;
+        }
+        .news-item {
+            margin: 20px 0;
+            .news-date {
+                display: inline-block;
+                color: #666;
+                font-size: 20px;
+                width: 100%;
+                text-align: center;
+            }
+            .news-middle {
+                width: 100%;
+                .news-title {
+                    display: inline-block;
+                    color: #000;
+                    &:hover {
+                        color: #337ab7;
+                    }
+                }
+                .news-content {
+                    font-size: 20px;
+                    padding: 10px;
+                    text-align: left;
+                    word-break: break-all;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 8;
+                    overflow: hidden;
+                }
+            }
+            .news-right {
+                img {
+                    width: 100%;
+                    height: 360px;
+                }
+            }
+        }
+    }
+    .knowledge {
+        .knowledge-container {
+            display: flex;
+            flex-direction: column;
+            .knowledge-content {
+                margin-bottom: 10px;
+                flex: 1;
+                img {
+                    width: 100%;
+                    height: 360px;
+                }
+            }
+            .knowledge-title:hover {
+                color: #337ab7;
+            }
+        }
+        .more {
+            color: #fff;
+            margin-bottom: 10px;
         }
     }
 }
 
-@media screen and (min-width: 768px) {
-    .index-title {
-        color: #666666;
-        font-size: 30px;
-        line-height: 1.4;
-        text-transform: uppercase;
-        text-align: center;
-        margin-bottom: 30px;
-        .en {
-            font-size: 40px;
-            font-family: Impact;
-            color: #338de9;
-            display: block;
-        }
-    }
+@media screen and (min-width: 1000px) {
     .product {
         .product-container {
             display: flex;
@@ -324,11 +762,16 @@ export default {
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-around;
-            .project-title {
-                display: block;
-                &:hover {
-                    color: #337ab7;
-                    cursor: pointer;
+            .project-article {
+                display: inline-block;
+                height: 400px;
+                vertical-align: top;
+                .project-title {
+                    display: block;
+                    &:hover {
+                        color: #337ab7;
+                        cursor: pointer;
+                    }
                 }
             }
             img {
@@ -414,7 +857,8 @@ export default {
             box-sizing: border-box;
             flex-direction: row;
             margin: 20px;
-            .news-left {
+            .news-date {
+                color: #666;
                 font-size: 20px;
                 width: 130px;
                 height: 400px;
@@ -424,13 +868,14 @@ export default {
                 height: 400px;
                 .news-title {
                     cursor: pointer;
-                    color: #ccc;
+                    color: #000;
                     &:hover {
                         color: #337ab7;
                     }
                 }
                 .news-content {
                     font-size: 20px;
+                    color: #ccc;
                     text-align: left;
                     padding-right: 5px;
                     word-break: break-all;
@@ -470,9 +915,6 @@ export default {
     }
     .more {
         cursor: pointer;
-        margin-top: 10px;
-        display: inline-block;
-        padding: 5px 40px;
         background: #c3bcbc;
         border-radius: 2px;
         transition: all .2s ease-in-out;
@@ -491,7 +933,7 @@ export default {
         &:hover .carousel-title {
             background: #c3bcbc;
             height: 50px;
-            color: #fff; // bottom: 8px;
+            color: #fff;
             width: 100%;
             transform: translateY(-8px);
             opacity: .8;

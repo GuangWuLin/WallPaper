@@ -34,4 +34,11 @@
             return 0;
         }
     }
-export default IsPhone;
+    const global = {
+        address:'浙江省绍兴市柯桥区钱清工业园',
+        tel:'15157573105',
+        copyRight:'CopyRight©️2018',
+        brand:'丝润墙布',
+        IsPhone
+    }
+export default global;

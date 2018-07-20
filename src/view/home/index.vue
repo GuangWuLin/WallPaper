@@ -1,18 +1,12 @@
 <template>
     <section class="wrap">
         <contents @popupForm='popupForm'></contents>
-        <Modal v-model="formShow" title="填写信息加入丝润强布" @on-ok='asyncOK' @on-cancel='cancel'>
+        <Modal v-model="formShow" title="填写信息加入丝润墙布" @on-ok='asyncOK' @on-cancel='cancel'>
             <user-form ref='userForm' @invalidate='invalidate'></user-form>
         </Modal>
         <footers></footers>
     </section>
 </template>
-<style lang="less" scoped>
-.wrap {
-    position: relative;
-    overflow: hidden;
-}
-</style>
 <script>
 import Contents from 'components/home/new-content'
 import Footers from 'components/home/footer'

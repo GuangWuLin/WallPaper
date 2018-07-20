@@ -20,7 +20,7 @@
 </style>
 
 <script>
-import IsPhone from 'assets/js/global'
+import global from 'assets/js/global'
 export default {
     data() {
         return {
@@ -43,7 +43,7 @@ export default {
         handleSubmit() {
             this.$refs['formValidate'].validate((valid) => {
                 if (valid) {
-                    if (!IsPhone(this.formValidate.phoneNo)) {
+                    if (!global.IsPhone(this.formValidate.phoneNo)) {
                         this.$Message.error('请填写正确的电话号码');
                         this.$emit('invalidate');
                         return

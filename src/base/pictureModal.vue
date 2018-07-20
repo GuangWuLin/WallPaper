@@ -3,13 +3,13 @@
         <div class="pic-container" v-if="pictures.length">
             <div v-for="(item,index) in pictures" :key="index" class="pic-item" @click="currentClick(item)">
                 <div class="pic">
-                    <a href="javascrip:;"><img v-lazy="item.img" alt=""></a>
-                    <a href="javascrip:;">{{item.title}}</a>
+                    <span><img v-lazy="item.img" alt=""></span>
+                    <span>{{item.title}}</span>
                 </div>
             </div>
-            <Modal v-model="currentSelected" width="660" :title='currentObj.title'>
+            <Modal v-model="currentSelected" width="80" :title='currentObj.title'>
                 <div style="text-align:center">
-                    <img v-lazy="currentObj.img" style="width:100%;height:100%;" alt="">
+                    <img :src="currentObj.img" style="width:100%;height:100%;" alt="">
                 </div>
             </Modal>
         </div>
@@ -26,7 +26,7 @@ export default {
         return {
             currentSelected: false,
             currentObj: {
-                describe: '',
+                title: '',
                 img: ''
             },
         }
@@ -34,7 +34,12 @@ export default {
     methods: {
         currentClick(item) {
             this.currentSelected = true;
-            this.currentObj = item;
+            this.currentObj.title = item.title;
+            this.currentObj.img = item.img;
+            // this.currentObj = {
+            //     title: item.title,
+            //     img: item.img + `?stamp=${Date.now()}`
+            // }
         }
     }
 }
@@ -61,15 +66,15 @@ export default {
             border-radius: 10px;
             border: 1px solid transparent;
             transition: all .5s linear;
-            a {
+            span {
                 font-size: 20px;
             }
-            a:first-child {
+            span:first-child {
                 display: inline-block;
                 width: 100%;
                 height: 100%;
             }
-            a:last-child {
+            span:last-child {
                 width: 100%;
                 height: 50px;
                 display: inline-block;
@@ -103,6 +108,7 @@ export default {
             transition: all .5s linear;
         }
         &:hover {
+            cursor: pointer;
             & .pic {
                 border: 6px solid #336699;
                 border-radius: 50%;
@@ -118,7 +124,7 @@ export default {
             img {
                 transform: scale(1.1); // filter: blur(0);
             }
-            a:last-child {
+            span:last-child {
                 bottom: 50%;
                 transform: translateY(50%);
                 font-size: 30px;

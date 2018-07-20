@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <div class="big-background">
-            <img v-lazy="img" alt="">
-        </div>
+    <div class="big-background">
+        <img style="width:90%;height:100%;" v-lazy="img" alt="">
         <Spin size="large" fix v-if="spinShow"></Spin>
     </div>
 </template>
@@ -43,5 +41,6 @@ export default {
     margin: 100px auto;
     background-position: 100px 100px;
     background-size: 100% 100%;
+    overflow: hidden;
 }
 </style>

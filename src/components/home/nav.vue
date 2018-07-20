@@ -153,7 +153,7 @@ export default {
             console.warn(item)
             let arr = item.split('/');
             if (arr.length === 1) {
-                this.$router.push({
+                this.$router.replace({
                     path: `/${item}`
                 });
             } else {
@@ -167,7 +167,7 @@ export default {
                     // 设置当前选中的知识类型分类
                     this.SET_CURRENT_KNOWLEDGE(arr[1]);
                 }
-                this.$router.push({
+                this.$router.replace({
                     name: arr[0],
                     params: {
                         id: arr[1]

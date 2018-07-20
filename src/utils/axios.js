@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
-import {LoadingBar} from 'iview'
+import {LoadingBar,Message} from 'iview'
 
 LoadingBar.config({color: '#4FDAFF', failedColor: '#f40', height: 4});
 axios.interceptors.request.use(config => {
@@ -86,13 +86,11 @@ function checkStatus(response) {
 function checkCode(res) {
   // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
   if (res.status === -404) {
-    alert(res.msg);
     LoadingBar.finish();
     // return Promise.reject(res);
     return res;
   }
   if (!res.success) {
-    alert(res.msg);
     LoadingBar.finish();
     // return Promise.reject(res);
     return res;
