@@ -87,6 +87,12 @@ const Join = resolve => {
     resolve(module);
   })
 }
+// list
+const ScrollList = resolve => {
+  import('base/scrollList').then(module => {
+    resolve(module);
+  })
+}
 Vue.use(iView);
 Vue.use(Router)
 
@@ -187,6 +193,12 @@ const router = new Router({
       path:'/join',
       name:'join',
       component: Join
+    },
+    // 招商加盟
+    {
+      path:'/scroll',
+      name:'scroll',
+      component: ScrollList
     }
   ]
 });

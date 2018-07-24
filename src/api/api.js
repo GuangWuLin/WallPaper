@@ -50,8 +50,8 @@ export  const request = {
             return axios.get(`${baseUrl}/introduction/get`)
         },
         // 资质荣誉
-        getHonor:() => {
-            return axios.get(`${baseUrl}/getHonor`)
+        getHonor:param => {
+            return axios.get(`${baseUrl}/getHonor`,param)
         }
     },
     // 最新资讯

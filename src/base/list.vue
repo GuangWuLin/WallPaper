@@ -9,7 +9,7 @@
             <div class="list-card-right">
                 <span class="list-title">{{item.title}}</span>
                 <span class="list-sub-title">{{item.date}}</span>
-                <p>
+                <p class="list-content">
                     {{item.abstract}}
                 </p>
             </div>
@@ -24,16 +24,17 @@
 }
 
 .list-container {
+    padding: 10px 80px;
     .list-card {
-        margin: 10px 20px;
-        height: 200px;
+        margin: 10px 24px;
+        height: 300px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        border: 1px solid rgba(0, 180, 220, 0.5);
+        border-bottom: 1px solid #ccc;
         img {
-            width: 200px;
-            height: 200px;
+            width: 360px;
+            height: 270px;
             perspective: 1px;
             transition: all 1s;
             display: inline-block;
@@ -50,13 +51,14 @@
                 margin: 10px;
             }
             .list-title {
-                font-size: 20px;
+                font-size: 30px;
                 font-weight: bold;
             }
             .list-sub-title {
-                font-size: 16px;
+                font-size: 24px;
             }
-            p {
+            .list-content {
+                font-size: 20px;
                 word-break: break-all;
                 text-overflow: ellipsis;
                 display: -webkit-box;
@@ -73,6 +75,7 @@
     .list-card:hover {
         cursor: pointer;
         border: 2px solid rgba(0, 180, 220, 0.5);
+        background-color: rgba(102, 102, 102, .1);
         animation: shine 1s linear 0s infinite alternate;
     }
     .list-card:hover img {

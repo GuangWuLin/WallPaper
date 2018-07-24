@@ -10,7 +10,8 @@
                 </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
-            <pro-show :pictures='currentProducts'></pro-show>
+            <pro-show :pictures='currentProducts.data'></pro-show>
+            <Page :total="currentProducts.total" v-show="currentProducts.total" @on-change='pageChange'></Page>
         </div>
     </section>
 </template>
@@ -36,7 +37,11 @@ export default {
         return {
             pro_value: '',
             currentCategory: '',
-            currentProducts: []
+            currentProducts: {
+                data: [],
+                pageIndex: 1,
+                total: 0
+            }
         }
     },
     watch: {
@@ -46,20 +51,28 @@ export default {
             this.pro_value = current.label;
             this.currentCategory = val;
             this.getAllPictures();
+        },
+        "currentProducts.pageIndex": {
+            handler() {
+                this.getAllPictures();
+            },
+            deep: true
         }
     },
     methods: {
         // 请求全部产品数据
         getAllPictures() {
             let param = {
-                productType: this.currentCategory
+                productType: this.currentCategory,
+                pageNo: this.currentProducts.pageIndex
             }
-            this.currentProducts = [];
+            this.currentProducts.data = [];
             this.$http.products.list(param).then(res => {
-                let { success, msg, data } = res;
+                let { success, msg, data, pageNums } = res;
                 if (success) {
+                    this.currentProducts.total = pageNums;
                     if (data.length) {
-                        this.currentProducts = data.map(item => {
+                        this.currentProducts.data = data.map(item => {
                             return {
                                 title: item.label,
                                 img: item.imgUrl
@@ -76,12 +89,14 @@ export default {
             let tmp = this.productCenter.find(item => item.label == val);
             this.currentCategory = tmp.value;
             this.getAllPictures();
+        },
+        pageChange(val) {
+            this.currentProducts.pageIndex = val;
         }
     },
     mounted() {
         // id 就是 当前案的 category
         this.currentCategory = this.$route.params.id;
-        console.log(this.$route)
         // 筛选 category
         let temp = this.productCenter.find(item => item.value === this.currentCategory);
         this.pro_value = temp.label;

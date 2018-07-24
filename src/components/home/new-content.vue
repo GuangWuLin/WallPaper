@@ -45,24 +45,15 @@
         </div>
         <!-- 公司简介 -->
         <div class="introduction">
-            <div class="left-content">
-                <div class='index-title product-title'>
-                    <span class="en">TRAILER</span>
-                    宣传画
-                </div>
-                <div class="left-img">
-                    <img class="img-content" v-lazy="introduction.imgUrl" alt="">
-                </div>
-            </div>
             <div class="right-content">
                 <div class='index-title product-title'>
                     <span class="en">COMPANY PROFILE</span>
                     公司简介
                 </div>
                 <div class="right-describe">
-                    <p>
-                        {{introduction.describe}}
-                    </p>
+                    <pre style='text-align:left;'>
+                                                                            <p v-html="introduction.describe"></p>
+                                                                        </pre>
                     <div class="forward" @click="about"></div>
                 </div>
             </div>
@@ -117,7 +108,7 @@
                 <div class="more" @click='knowledgeMore'>更多</div>
             </div>
         </div>
-        <Modal v-model="currentSelected" width="80" :title='currentObj.describe'>
+        <Modal v-model="currentSelected" width="60" :title='currentObj.describe'>
             <div style="text-align:center">
                 <img v-lazy="currentObj.imgUrl" style="width:100%;height:100%;" alt="">
             </div>
@@ -181,7 +172,11 @@ export default {
                 this.spinShow = false;
                 if (success) {
                     if (typeof data === 'object' && Object.keys(data).length) {
-                        this.projects = data.projectList;
+                        if (data.projectList.length > 2) {
+                            this.projects = data.projectList.slice(0, 2);
+                        } else {
+                            this.projects = data.projectList
+                        }
                         if (data.productType.length >= 4) {
                             this.products = data.productType.slice(0, 4);
                         } else {
@@ -197,8 +192,15 @@ export default {
                         } else {
                             this.knowledges = data.knowledges
                         }
-                        this.news = data.newsList;
-                        this.introduction = data.introduction;
+                        if (data.newsList.length >= 3) {
+                            this.news = data.newsList.slice(0, 3);
+                        } else {
+                            this.news = data.newsList
+                        }
+                        this.introduction = {
+                            ...data.introduction,
+                            describe: data.introduction.describe.replace(/↵/g, '<br/>')
+                        }
                     }
                 } else {
                     this.$Message.warning('轮播图数据获取失败，原因： ' + msg);
@@ -727,13 +729,14 @@ export default {
 
 @media screen and (min-width: 1000px) {
     .product {
+        padding: 10px 80px;
         .product-container {
             display: flex;
             flex-flow: row nowrap;
             .product-content {
                 margin: 10px;
                 flex: 1;
-                height: 520px;
+                height: 320px;
                 cursor: pointer;
                 .product-title {
                     opacity: 0;
@@ -748,13 +751,14 @@ export default {
                     opacity: .8;
                 }
                 img {
-                    width: 480px;
-                    height: 360px;
+                    width: 360px;
+                    height: 270px;
                 }
             }
         }
     }
     .project {
+        padding: 10px 80px;
         display: flex;
         flex-direction: column;
         background: url('../../../static/img/img-45.png');
@@ -776,45 +780,26 @@ export default {
             }
             img {
                 cursor: pointer;
-                width: 640px;
-                height: 360px;
+                width: 360px;
+                height: 270px;
             }
         }
     }
     .introduction {
-        display: flex;
-        flex-flow: row nowrap;
         width: 100%;
+        padding: 10px 80px;
         background: url(../../../static/img/img-55.png) no-repeat;
         color: #fff;
         margin-top: 10px;
         .product-title {
             color: #fff;
         }
-        .left-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            .left-img {
-                width: 100%;
-                img {
-                    width: 100%;
-                    height: 400px;
-                }
-            }
-        }
         .right-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            width: 50%;
             .forward {
                 background: url(../../../static/img/img-70.png) no-repeat;
                 width: 50px;
                 height: 50px;
                 display: block;
-                margin-top: 30px;
                 &:hover {
                     background: url(../../../static/img/img-59.png) no-repeat;
                 }
@@ -822,6 +807,7 @@ export default {
         }
     }
     .honor {
+        padding: 10px 80px;
         display: flex;
         flex-direction: column;
         background: url('../../../static/img/img-5.png');
@@ -833,12 +819,17 @@ export default {
             box-sizing: border-box;
             .honor-content {
                 margin: 10px;
-                flex: 1;
                 img {
-                    width: 300px;
-                    height: 400px;
+                    width: 270px;
+                    height: 360px;
                 }
             }
+        }
+        .more {
+            display: inline-block;
+            width: 160px;
+            text-align: center;
+            margin: 5px auto;
         }
     }
     .bg62 {
@@ -895,22 +886,25 @@ export default {
             }
         }
     }
-    .knowledge-container {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-around;
-        .knowledge-content {
-            margin: 10px;
-            flex: 1;
-            cursor: pointer;
-            img {
-                width: 640px;
-                height: 360px;
+    .knowledge {
+        padding: 10px 80px;
+        .knowledge-container {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
+            .knowledge-content {
+                margin: 10px;
+                flex: 1;
+                cursor: pointer;
+                img {
+                    width: 480px;
+                    height: 270px;
+                }
             }
-        }
-        .knowledge-title:hover {
-            color: #337ab7;
-            cursor: pointer;
+            .knowledge-title:hover {
+                color: #337ab7;
+                cursor: pointer;
+            }
         }
     }
     .more {
@@ -940,7 +934,7 @@ export default {
         }
         img {
             width: 100%;
-            height: 540px;
+            height: 800px;
         }
     }
 }

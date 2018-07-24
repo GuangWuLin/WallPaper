@@ -2,7 +2,7 @@
     <!-- 单独的背景图片 -->
     <section>
         <div>
-            <img src="../../static/img/bg-app.jpg" style="width:100%;height:100%;" alt="">
+            <img src="../../static/img/top-img.png" style="width:100%;height:100%;" alt="">
         </div>
     </section>
 </template>

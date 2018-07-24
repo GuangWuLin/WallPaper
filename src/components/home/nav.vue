@@ -150,7 +150,6 @@ export default {
         },
         // 跳转路由
         enterPro(item) {
-            console.warn(item)
             let arr = item.split('/');
             if (arr.length === 1) {
                 this.$router.replace({
@@ -223,7 +222,6 @@ export default {
     mounted() {
         let w = document.documentElement.clientWidth;
         w <= 768 ? this.isGiantScreen = false : this.isGiantScreen = true;
-        console.log(w, this.isGiantScreen)
         this.getProducts();
         this.getProjects();
         this.getKnowledges();

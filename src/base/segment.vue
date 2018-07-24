@@ -1,7 +1,7 @@
 <template>
     <!-- 图片与文章 -->
-    <div>
-        <div v-if="content.title">
+    <div class="article-container">
+        <div v-if="content.title || content.date">
             <span class="article-title">{{content.title}}</span>
             <span class="article-date">{{content.date}}</span>
             <div v-html='content.content' class="article-content">
@@ -29,28 +29,31 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.article-title {
-    font-size: 30px;
-    color: #000;
-}
-
-.article-date {
-    display: block;
-    font-size: 20px;
-    color: #666;
-}
-
-.article-content {
-    font-size: 18px;
-    color: #001;
-}
-
-.empty-box {
-    // margin: auto;
+.article-container {
     width: 100%;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    padding: 10px 80px;
+    .article-title {
+        font-size: 30px;
+        color: #000;
+    }
+
+    .article-date {
+        display: block;
+        font-size: 20px;
+        color: #666;
+    }
+
+    .article-content {
+        text-align: left;
+        font-size: 20px;
+        color: #001;
+    }
+    .empty-box {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 </style>

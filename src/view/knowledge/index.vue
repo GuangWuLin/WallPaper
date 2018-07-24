@@ -14,7 +14,8 @@
                 </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
-            <block-pic :pictures='Knowledges' @currentClicked='currentClicked'></block-pic>
+            <block-pic :pictures='Knowledges.data' @currentClicked='currentClicked'></block-pic>
+            <Page :total="Knowledges.total" v-show="Knowledges.total" @on-change='pageChange'></Page>
         </div>
         <Spin size="large" fix v-if="spinShow"></Spin>
     </section>
@@ -30,7 +31,11 @@ export default {
             spinShow: false,
             knowledge_kind: '',
             currentCategory: '',
-            Knowledges: []
+            Knowledges: {
+                data: [],
+                pageIndex: 1,
+                total: 0
+            }
         }
     },
     watch: {
@@ -39,6 +44,12 @@ export default {
             this.knowledge_kind = current.label;
             this.currentCategory = val;
             this.getAllPictures();
+        },
+        "Knowledges.pageIndex": {
+            handler() {
+                this.getAllPictures();
+            },
+            deep: true
         }
     },
     methods: {
@@ -49,16 +60,19 @@ export default {
         },
         getAllPictures() {
             let param = {
-                typeId: this.currentCategory
+                typeId: this.currentCategory,
+                pageNo: this.Knowledges.pageIndex
             }
             this.spinShow = true;
-            this.Knowledges = [];
+            this.Knowledges.data = [];
+            this.Knowledges.total = 0;
             this.$http.knowledge.knowledgeType(param).then(res => {
-                let { success, msg, data } = res;
+                let { success, msg, data, pageNums } = res;
                 this.spinShow = false;
                 if (success) {
+                    this.Knowledges.total = pageNums;
                     if (data.length) {
-                        this.Knowledges = data.map(item => {
+                        this.Knowledges.data = data.map(item => {
                             return {
                                 title: item.title,
                                 img: item.imgUrl,
@@ -78,6 +92,9 @@ export default {
                     id: item.id
                 }
             })
+        },
+        pageChange(val) {
+            this.currentProducts.pageIndex = val;
         }
     },
     mounted() {

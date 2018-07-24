@@ -7,9 +7,9 @@
                     <span>{{item.title}}</span>
                 </div>
             </div>
-            <Modal v-model="currentSelected" width="80" :title='currentObj.title'>
+            <Modal v-model="currentSelected" :width='modalWidth' :title='currentObj.title'>
                 <div style="text-align:center">
-                    <img :src="currentObj.img" style="width:100%;height:100%;" alt="">
+                    <img :src="currentObj.img" :style="modalStyle" alt="">
                 </div>
             </Modal>
         </div>
@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-    props: ['pictures'],
+    props: ['pictures', 'modalWidth', 'modalStyle'],
     data() {
         return {
             currentSelected: false,
@@ -48,23 +48,26 @@ export default {
 <style lang="less" scoped>
 .pic-container {
     width: 100%;
+    padding: 10px 80px;
     background: #fff;
-    margin: 10px 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     .pic-item {
         box-sizing: border-box;
-        width: 300px;
+        width: 18%;
         height: 300px;
-        margin: 10px 0; // flex-grow: 1;
+        border-radius: 8px;
+        transition: border .5s linear;
+        margin: 10px;
         .pic {
+            // width: 300px;
+            width: 100%;
             height: 100%;
-            width: 300px;
             position: relative;
             overflow: hidden;
             border-radius: 10px;
-            border: 1px solid transparent;
+            border: 1px solid #ccc;
             transition: all .5s linear;
             span {
                 font-size: 20px;
@@ -93,19 +96,9 @@ export default {
                 left: 0;
                 top: 0;
                 width: 100%;
-                height: 100%; // filter: blur(2px);
+                height: 100%;
                 transition: all .7s linear;
             }
-        }
-        &::after {
-            content: '';
-            display: block;
-            position: relative;
-            top: -100%;
-            width: 300px;
-            height: 300px;
-            border: 1px solid transparent;
-            transition: all .5s linear;
         }
         &:hover {
             cursor: pointer;
@@ -113,16 +106,8 @@ export default {
                 border: 6px solid #336699;
                 border-radius: 50%;
             }
-            &::after {
-                width: 260px;
-                height: 260px;
-                border: 6px solid #FF6666;
-                transform: translate(20px, 20px);
-                border-radius: 50%;
-                overflow: hidden;
-            }
             img {
-                transform: scale(1.1); // filter: blur(0);
+                transform: scale(1.1);
             }
             span:last-child {
                 bottom: 50%;

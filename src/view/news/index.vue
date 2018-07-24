@@ -1,7 +1,8 @@
 <template>
     <section>
         <single-bg></single-bg>
-        <list @toDetail='toDetail' :list='list'></list>
+        <list @toDetail='toDetail' :list='list.data'></list>
+        <Page :current="list.pageIndex" :total="list.total" v-show="list.total" @on-change='pageChange'></Page>
         <Spin size="large" fix v-if="spinShow"></Spin>
     </section>
 </template>
@@ -16,7 +17,19 @@ export default {
     data() {
         return {
             spinShow: false,
-            list: []
+            list: {
+                pageIndex: 1,
+                total: 0,
+                data: []
+            }
+        }
+    },
+    watch: {
+        "list.pageIndex": {
+            handler() {
+                this.getNewsList();
+            },
+            deep: true
         }
     },
     methods: {
@@ -30,12 +43,16 @@ export default {
         },
         getNewsList() {
             this.spinShow = true;
-            this.$http.news.company.news().then(res => {
+            let param = {
+                pageNo: this.list.pageIndex
+            }
+            this.$http.news.company.news(param).then(res => {
                 this.spinShow = false;
-                let { success, data, msg } = res;
+                let { success, data, msg, pageNums } = res;
                 if (success) {
+                    this.list.total = pageNums;
                     if (data.length) {
-                        this.list = data.map(item => {
+                        this.list.data = data.map(item => {
                             return {
                                 title: item.title,
                                 date: item.date,
@@ -49,6 +66,9 @@ export default {
                     this.$Message.warning('获取公司新闻失败，原因： ' + msg);
                 }
             })
+        },
+        pageChange(val) {
+            this.list.pageIndex = val;
         }
     },
     mounted() {

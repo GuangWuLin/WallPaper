@@ -8,8 +8,10 @@
                 </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
-            <block-pic :pictures='shopImages' @currentClicked='currentClicked'></block-pic>
+            <block-pic :pictures='shopImages.data' @currentClicked='currentClicked'></block-pic>
+            <Page :total="shopImages.total" v-show="shopImages.total" @on-change='pageChange'></Page>
         </div>
+        <Spin size="large" fix v-if="spinShow"></Spin>
     </section>
 </template>
 <script>
@@ -19,16 +21,36 @@ export default {
     data() {
         return {
             shop_image: '专卖店形象',
-            shopImages: []
+            spinShow: false,
+            shopImages: {
+                data: [],
+                pageIndex: 1,
+                total: 0
+            }
+        }
+    },
+    watch: {
+        "shopImages.pageIndex": {
+            handler() {
+                this.getAllPictures();
+            },
+            deep: true
         }
     },
     methods: {
         getAllPictures() {
-            this.$http.shop.agency().then(res => {
-                let { success, msg, data } = res;
+            let param = {
+                pageNo: this.shopImages.pageIndex
+            }
+            this.shopImages.data = [];
+            this.spinShow = true;
+            this.$http.shop.agency(param).then(res => {
+                let { success, msg, data, pageNums } = res;
+                this.spinShow = false;
                 if (success) {
+                    this.shopImages.total = pageNums;
                     if (data.length) {
-                        this.shopImages = data.map(item => {
+                        this.shopImages.data = data.map(item => {
                             return {
                                 title: item.title,
                                 img: item.imgUrl,
@@ -48,6 +70,9 @@ export default {
                     id: item.id
                 }
             })
+        },
+        pageChange(val) {
+            this.shopImages.pageIndex = val;
         }
     },
     mounted() {

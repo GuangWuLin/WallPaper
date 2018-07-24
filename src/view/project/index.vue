@@ -10,7 +10,9 @@
                 </Radio>
             </RadioGroup>
             <!-- 图片列表 -->
-            <block-pic :pictures='currentProjects' @currentClicked='currentClicked'></block-pic>
+            <block-pic :pictures='currentProjects.data' @currentClicked='currentClicked'></block-pic>
+            <Page :total="currentProjects.total" v-show="currentProjects.total" @on-change='pageChange'></Page>
+            <Spin size="large" fix v-if="spinShow"></Spin>
         </div>
     </section>
 </template>
@@ -22,9 +24,14 @@ export default {
     mixins: [Navs],
     data() {
         return {
+            spinShow: false,
             project_area: '',
             currentCategory: '',
-            currentProjects: []
+            currentProjects: {
+                data: [],
+                pageIndex: 1,
+                total: 0
+            }
         }
     },
     watch: {
@@ -33,19 +40,29 @@ export default {
             this.project_area = current.label;
             this.currentCategory = val;
             this.getAllPictures();
+        },
+        "currentProjects.pageIndex": {
+            handler() {
+                this.getAllPictures();
+            },
+            deep: true
         }
     },
     methods: {
         getAllPictures() {
             let param = {
-                area: this.currentCategory
+                area: this.currentCategory,
+                pageNo: this.currentProjects.pageIndex
             }
-            this.currentProjects = [];
+            this.currentProjects.data = [];
+            this.spinShow = true;
             this.$http.projects.projectList(param).then(res => {
-                let { success, msg, data } = res;
+                let { success, msg, data, pageNums } = res;
+                this.spinShow = false;
                 if (success) {
+                    this.currentProjects.total = pageNums;
                     if (data.length) {
-                        this.currentProjects = data.map(item => {
+                        this.currentProjects.data = data.map(item => {
                             return {
                                 title: item.title,
                                 img: item.imgUrl,
@@ -63,23 +80,22 @@ export default {
             this.$router.push({
                 name: 'projectDetail',
                 params: {
-                    id: item.id
+                    ...item
                 }
             })
         },
         radioChange(val) {
-            console.log(val);
             let temp = this.projects.find(item => item.label === val);
             this.currentCategory = temp.value;
             this.getAllPictures();
+        },
+        pageChange(val) {
+            this.currentProjects.pageIndex = val;
         }
     },
     components: {
         SingleBg,
         BlockPic
-    },
-    mounted() {
-        this.getAllPictures();
     },
     mounted() {
         console.log(this.$route);

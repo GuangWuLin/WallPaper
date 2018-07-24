@@ -2,10 +2,6 @@
     <section class="container">
         <!-- 第一区-安图 -->
         <div class="about">
-            <div class="modal">
-                <span>关于我们</span>
-                <span>我们倾听客户需求，以最前沿的设计理念，赋予全新的形象</span>
-            </div>
         </div>
         <!-- 第二区中间介绍 -->
         <div class="router_view">
@@ -60,33 +56,11 @@ export default {
     flex-direction: column;
     .about {
         width: 100%;
-        background-image: url(../../../static/img/bg-slider-icons-bottom.jpg);
-        height: 400px;
+        background-image: url(../../../static/img/top-img.png);
+        height: 600px;
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: scroll;
-        background-position: 50% -30px;
-        .modal {
-            margin: 0 auto;
-            background: rgba(0, 0, 0, .5);
-            color: #fff;
-            display: flex;
-            height: 100%;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            span {
-                display: block;
-            }
-            span:first-child {
-                font-size: 50px;
-                font-weight: bold;
-                margin-bottom: 20px;
-            }
-            span:last-child {
-                font-size: 30px;
-            }
-        }
     }
     .router_view {
         margin: 10px auto;

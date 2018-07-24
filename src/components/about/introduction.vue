@@ -1,12 +1,8 @@
 <template>
     <!-- 公司简介 -->
     <div class="who">
-        <img class="who-pic" v-lazy="introduction.imgUrl" alt="">
         <div class="who-describle">
-            <span class="who-sub-title">Who We Are</span>
-            <p>
-                {{introduction.describe}}
-            </p>
+            <pre style='text-align:left;font-size: 20px;' v-html="introduction.describe">  </pre>
         </div>
     </div>
 </template>
@@ -42,32 +38,8 @@
 
 @media screen and (min-width:768px) {
     .who {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        .who-pic {
-            width: 50%;
-            height: 200px;
-            padding: 10px;
-            margin-top: 100px;
-        }
-        .who-describle {
-            span {
-                font-size: 30px;
-                font-weight: bold;
-                display: inline-block;
-                width: 100%;
-                margin-bottom: 20px;
-                text-align: left;
-            }
-            p {
-                padding: 10px;
-                margin: 10px;
-                font-size: 14px;
-                line-height: 30px;
-                text-align: left;
-            }
-        }
+        width: 100%;
+        padding: 10px 80px;
     }
 }
 </style>
@@ -90,8 +62,13 @@ export default {
                 let { success, data, msg } = res;
                 if (success) {
                     if (typeof data === 'object' && Object.keys(data).length) {
-                        this.introduction = data;
+                        this.introduction = {
+                            ...data,
+                            describe: data.describe.replace(/↵/gi, '<br />'),
+                            fuck: 1
+                        }
                     }
+                    console.log(this.introduction)
                 } else {
                     this.$Message.warning('公司简介信息获取失败，原因： ' + msg);
                 }

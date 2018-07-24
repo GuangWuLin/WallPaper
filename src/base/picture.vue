@@ -17,14 +17,14 @@
 <style lang="less" scoped>
 .pic-container {
     width: 100%;
-    background: #fff; // padding: 0 20px;
-    margin: 10px 0;
+    padding: 10px 80px;
+    background: #fff;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 
     .pic-item {
-        width: 300px;
+        width: 18%;
         height: 300px;
         box-sizing: border-box;
         margin: 10px 0; // flex-grow: 1;
@@ -32,9 +32,9 @@
             border-radius: 8px;
             overflow: hidden;
             position: relative;
-            height: 300px;
+            height: 100%;
             width: 300px;
-            border: 1px solid transparent;
+            border: 1px solid #ccc;
             transition: all .5s linear;
             span {
                 font-size: 20px;
@@ -70,29 +70,11 @@
                 transform: scale(1.1); // filter: blur(0);
             }
         }
-        &::after {
-            content: '';
-            display: block;
-            position: relative;
-            top: -100%;
-            width: 300px;
-            height: 300px;
-            border: 1px solid transparent;
-            transition: all .5s linear;
-        }
         &:hover {
             cursor: pointer;
             & .pic {
                 border: 6px solid #336699;
                 border-radius: 50%;
-            }
-            &::after {
-                width: 260px;
-                height: 260px;
-                border: 6px solid #FF6666;
-                transform: translate(20px, 20px);
-                border-radius: 50%;
-                overflow: hidden;
             }
             img {
                 transform: scale(1.1); // filter: blur(0);

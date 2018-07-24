@@ -1,11 +1,18 @@
 <template>
-    <div class="big-background">
-        <img style="width:90%;height:100%;" v-lazy="img" alt="">
+    <div>
+        <single-bg></single-bg>
+        <div class="big-background">
+            <img style="width:90%;" v-lazy="img" alt="">
+        </div>
         <Spin size="large" fix v-if="spinShow"></Spin>
     </div>
 </template>
 <script>
+import SingleBg from 'base/singleBg'
 export default {
+    components: {
+        SingleBg
+    },
     data() {
         return {
             spinShow: false,
@@ -36,11 +43,7 @@ export default {
 
 <style lang="less" scoped>
 .big-background {
-    width: 100%;
-    height: 800px;
-    margin: 100px auto;
-    background-position: 100px 100px;
-    background-size: 100% 100%;
-    overflow: hidden;
+    width: 100%; // height: 800px;
+    margin: 50px 0;
 }
 </style>
