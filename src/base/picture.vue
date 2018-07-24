@@ -17,8 +17,7 @@
 <style lang="less" scoped>
 .pic-container {
     width: 100%;
-    padding: 10px 80px;
-    background: #fff;
+    padding: 10px 80px; // background: #fff;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

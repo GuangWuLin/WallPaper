@@ -13,7 +13,7 @@ import 'lib-flexible';
 import {request} from 'api/api'
 Vue.use(VueLazyload, {
   attempt: 1,
-  error:'../static/img/who-img.jpg',
+  error:'../static/img/404.png',
   loading: require('../static/img/32.jpeg')
 })
 Vue.prototype.$http = request;

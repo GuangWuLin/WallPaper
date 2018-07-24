@@ -86,7 +86,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .shop-content {
-    // margin-bottom: 100px;
     .pro-select {
         margin: 20px;
     }

@@ -70,6 +70,7 @@ export default {
   }
   .content {
     margin-top: 60px;
+    background: url(../static/img/img-01.png);
   }
 }
 
