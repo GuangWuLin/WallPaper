@@ -43,7 +43,7 @@ function checkStatus(response) {
           : '拒绝访问';
         setTimeout(() => {
           // Win10_child.close();
-          window.location.replace('/#/');
+          window.location.replace('/');
         }, 3000);
         break;
       case 404:

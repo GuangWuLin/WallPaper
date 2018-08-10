@@ -115,10 +115,7 @@ export default {
     }
 }
 
-
 .pro-select {
-    // display: flex;
-    // justify-content: center;
     margin: 20px;
 }
 </style>

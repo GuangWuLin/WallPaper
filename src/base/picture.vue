@@ -17,16 +17,13 @@
 <style lang="less" scoped>
 .pic-container {
     width: 100%;
-    padding: 10px 80px; // background: #fff;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-
     .pic-item {
-        width: 18%;
         height: 300px;
         box-sizing: border-box;
-        margin: 10px 0; // flex-grow: 1;
+        margin: 10px 0;
         .pic {
             border-radius: 8px;
             overflow: hidden;
@@ -62,11 +59,11 @@
                 left: 0;
                 top: 0;
                 width: 100%;
-                height: 100%; // filter: blur(2px);
+                height: 100%;
                 transition: all .7s linear;
             }
             img:hover {
-                transform: scale(1.1); // filter: blur(0);
+                transform: scale(1.1);
             }
         }
         &:hover {
@@ -86,6 +83,24 @@
                 height: 100px;
                 line-height: 100px;
             }
+        }
+    }
+}
+
+@media screen and (max-width:414px) {
+    .pic-container {
+        padding: 10px 20px;
+        .pic-item {
+            width: 45%;
+        }
+    }
+}
+
+@media screen and (min-width:1100px) {
+    .pic-container {
+        padding: 10px 80px;
+        .pic-item {
+            width: 18%;
         }
     }
 }

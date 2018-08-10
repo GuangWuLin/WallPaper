@@ -31,12 +31,10 @@ export default {
 <style lang="less" scoped>
 .article-container {
     width: 100%;
-    padding: 10px 80px;
     .article-title {
         font-size: 30px;
         color: #000;
     }
-
     .article-date {
         display: block;
         font-size: 20px;
@@ -54,6 +52,36 @@ export default {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+    }
+}
+
+@media screen and (max-width:414px) {
+    .article-container {
+        padding: 10px 20px;
+        .article-content {
+            overflow: hidden;
+        }
+    }
+}
+
+@media screen and (min-width:415px) and (max-width:1099px) {
+    .article-container {
+        padding: 10px 20px;
+        .article-content {
+            overflow: hidden;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:1100px) {
+    .article-container {
+        padding: 10px 80px;
+        .empty-box {
+            height: 200px;
+        }
     }
 }
 </style>

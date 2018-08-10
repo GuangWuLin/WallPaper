@@ -36,10 +36,6 @@ export default {
             this.currentSelected = true;
             this.currentObj.title = item.title;
             this.currentObj.img = item.img;
-            // this.currentObj = {
-            //     title: item.title,
-            //     img: item.img + `?stamp=${Date.now()}`
-            // }
         }
     }
 }
@@ -48,20 +44,17 @@ export default {
 <style lang="less" scoped>
 .pic-container {
     width: 100%;
-    padding: 10px 80px; // background: #fff;
     display: flex;
-    flex-flow: row wrap;
+    flex-wrap: wrap;
     justify-content: space-around;
     .pic-item {
         box-sizing: border-box;
-        width: 18%;
         height: 300px;
-        border-radius: 8px;
         transition: border .5s linear;
-        margin: 10px;
+        margin: 10px 0;
         .pic {
-            // width: 300px;
-            width: 100%;
+            border-radius: 8px;
+            width: 300px;
             height: 100%;
             position: relative;
             overflow: hidden;
@@ -116,6 +109,24 @@ export default {
                 height: 100px;
                 line-height: 100px;
             }
+        }
+    }
+}
+
+@media screen and (max-width:414px) {
+    .pic-container {
+        padding: 10px 20px;
+        .pic-item {
+            width: 45%;
+        }
+    }
+}
+
+@media screen and (min-width:1100px) {
+    .pic-container {
+        padding: 10px 80px;
+        .pic-item {
+            width: 18%;
         }
     }
 }

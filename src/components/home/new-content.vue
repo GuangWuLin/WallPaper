@@ -1,7 +1,7 @@
 <template>
     <section class="wrap-container">
         <!-- 轮播图 -->
-        <Carousel autoplay v-model="value" loop arrow='never'>
+        <Carousel autoplay v-model="value" loop dots='outside' arrow='always'>
             <CarouselItem v-for="(item,index) in carousels" class="carousel" :key="index">
                 <div class="demo-carousel">
                     <img :src="item" alt="">
@@ -52,8 +52,8 @@
                 </div>
                 <div class="right-describe">
                     <pre style='text-align:left;'>
-                                                                            <p v-html="introduction.describe"></p>
-                                                                        </pre>
+                        <p v-html="introduction.describe" style="padding:0 10px;white-space: pre-wrap;"></p>
+                    </pre>
                     <div class="forward" @click="about"></div>
                 </div>
             </div>
@@ -311,7 +311,7 @@ export default {
         }
         img {
             width: 100%;
-            height: 300px;
+            height: 400px;
         }
     } // 产品中心
     .product {
@@ -389,28 +389,17 @@ export default {
         .product-title {
             color: #fff;
         }
-        .left-content {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            .left-img {
-                width: 100%;
-                img {
-                    width: 100%;
-                    height: 400px;
-                }
-            }
-        }
         .right-content {
-            display: flex;
-            flex-direction: column;
             width: 100%;
+            p {
+                word-wrap: break-word;
+            }
             .forward {
                 background: url(../../../static/img/img-70.png) no-repeat;
-                width: 50px;
-                height: 50px;
+                width: 80px;
+                height: 80px;
                 display: block;
-                margin-top: 30px;
+                margin: 30px 10px;
                 &:hover {
                     background: url(../../../static/img/img-59.png) no-repeat;
                 }

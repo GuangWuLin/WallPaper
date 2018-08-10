@@ -2,7 +2,7 @@
     <!-- 公司简介 -->
     <div class="who">
         <div class="who-describle">
-            <pre style='text-align:left;font-size: 20px;' v-html="introduction.describe">  </pre>
+            <pre style='text-align:left;white-space:pre-wrap;padding:0 10px;' v-html="introduction.describe">  </pre>
         </div>
     </div>
 </template>
@@ -15,23 +15,7 @@
             height: 200px;
         }
         .who-describle {
-            .who-sub-title {
-                font-size: 30px;
-                font-weight: bold;
-                display: inline-block;
-                width: 100%;
-                text-align: center;
-            }
-            p {
-                padding: 10px;
-                margin: 10px;
-                font-size: 14px;
-                line-height: 30px;
-                text-align: left;
-                &::selection {
-                    color: orange;
-                }
-            }
+            font-size: 20px;
         }
     }
 }

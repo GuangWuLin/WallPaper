@@ -17,24 +17,13 @@
     </section>
 </template>
 <style lang="less" scoped>
-@media screen and (min-width:768px) {
-    .list-container {
-        margin-bottom: 100px;
-    }
-}
-
 .list-container {
-    padding: 10px 80px;
     .list-card {
-        margin: 10px 24px;
-        height: 300px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         border-bottom: 1px solid #ccc;
         img {
-            width: 360px;
-            height: 270px;
             perspective: 1px;
             transition: all 1s;
             display: inline-block;
@@ -80,6 +69,51 @@
     }
     .list-card:hover img {
         transform: rotateY(180deg);
+    }
+}
+
+@media screen and (min-width:1100px) {
+    .list-container {
+        padding: 10px 80px;
+        margin-bottom: 100px;
+        .list-card {
+            margin: 10px 24px;
+            height: 300px;
+            img {
+                width: 360px;
+                height: 270px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:415px) and (max-width:1099px) {
+    .list-container {
+        padding: 10px 20px;
+        margin-bottom: 100px;
+        .list-card {
+            margin: 5px 12px;
+            height: 200px;
+            img {
+                width: 240px;
+                height: 180px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:414px) {
+    .list-container {
+        padding: 10px 20px;
+        margin-bottom: 100px;
+        .list-card {
+            margin: 5px 12px;
+            height: 200px;
+            img {
+                width: 240px;
+                height: 180px;
+            }
+        }
     }
 }
 
