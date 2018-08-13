@@ -21,7 +21,7 @@ export default [
           component:() => import('components/about/introduction')
         },
         {
-           path:'/about/honor',
+          path:'/about/honor',
           name:'honor',
           component:() => import('components/about/honor')
         }
@@ -30,6 +30,7 @@ export default [
     // 产品中心
     {
       path:'/product/:id',
+      props:true,
       name:'product',
       component:() => import('view/product/index'),
     },
@@ -54,7 +55,7 @@ export default [
     // 工程业绩
     {
       path:'/project/:id',
-      // path:'/project',      
+      props:true,    
       name:'project',
       component: () => import('view/project/index')
     },
@@ -67,7 +68,7 @@ export default [
     // 知识园地
     {
       path:'/knowledge/:id',
-      // path:'/knowledge/:id',
+      props:true,
       name:'knowledge',
       component: () => import('view/knowledge/index')
     },

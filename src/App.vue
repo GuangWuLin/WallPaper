@@ -4,9 +4,11 @@
       <Header>
         <nav1 class="nav1Hide"></nav1>
       </Header>
-      <Content class="content">
-        <router-view></router-view>
-      </Content>
+      <transition name="fade">
+        <Content class="content">
+          <router-view></router-view>
+        </Content>
+      </transition>
       <Footer class="layout-footer-center" breakpoint='md'>
         <tail></tail>
       </Footer>

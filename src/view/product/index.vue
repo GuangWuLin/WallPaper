@@ -33,6 +33,7 @@ export default {
         SingleBg,
         ProShow
     },
+    props: ['id'],
     data() {
         return {
             pro_value: '',
@@ -55,8 +56,7 @@ export default {
         "currentProducts.pageIndex": {
             handler() {
                 this.getAllPictures();
-            },
-            deep: true
+            }
         }
     },
     methods: {
@@ -96,7 +96,7 @@ export default {
     },
     mounted() {
         // id 就是 当前案的 category
-        this.currentCategory = this.$route.params.id;
+        this.currentCategory = this.id;
         // 筛选 category
         let temp = this.productCenter.find(item => item.value === this.currentCategory);
         this.pro_value = temp.label;

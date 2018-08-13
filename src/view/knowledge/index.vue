@@ -26,6 +26,7 @@ import { Navs } from 'assets/js/mixin'
 import BlockPic from 'base/picture'
 export default {
     mixins: [Navs],
+    props: ['id'],
     data() {
         return {
             spinShow: false,
@@ -48,8 +49,7 @@ export default {
         "Knowledges.pageIndex": {
             handler() {
                 this.getAllPictures();
-            },
-            deep: true
+            }
         }
     },
     methods: {
@@ -99,7 +99,7 @@ export default {
     },
     mounted() {
         // id 就是 当前案的 category
-        this.currentCategory = this.$route.params.id;
+        this.currentCategory = this.id;
         // 筛选 category
         let temp = this.knowledges.find(item => item.value === this.currentCategory);
         this.knowledge_kind = temp.label;

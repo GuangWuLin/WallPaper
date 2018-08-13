@@ -28,8 +28,7 @@ export default {
         "list.pageIndex": {
             handler() {
                 this.getNewsList();
-            },
-            deep: true
+            }
         }
     },
     methods: {

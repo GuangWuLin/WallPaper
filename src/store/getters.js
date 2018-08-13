@@ -9,5 +9,3 @@ export const projects = state => state.projects
 export const knowledges = state => state.knowledges
 
 export const currentKnowledge = state => state.currentKnowledge
-
-

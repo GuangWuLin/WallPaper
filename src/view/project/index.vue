@@ -22,6 +22,7 @@ import { Navs } from 'assets/js/mixin'
 import BlockPic from 'base/picture'
 export default {
     mixins: [Navs],
+    props: ['id'],
     data() {
         return {
             spinShow: false,
@@ -44,8 +45,7 @@ export default {
         "currentProjects.pageIndex": {
             handler() {
                 this.getAllPictures();
-            },
-            deep: true
+            }
         }
     },
     methods: {
@@ -98,9 +98,8 @@ export default {
         BlockPic
     },
     mounted() {
-        console.log(this.$route);
         // id 就是 当前案的 category
-        this.currentCategory = this.$route.params.id;
+        this.currentCategory = this.id;
         // 筛选 category
         let temp = this.projects.find(item => item.value === this.currentCategory);
         this.project_area = temp.label;

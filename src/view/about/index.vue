@@ -13,10 +13,6 @@ export default {
     components: {
         Headers,
         Footers
-    },
-    data() {
-        return {
-        }
     }
 }
 </script>

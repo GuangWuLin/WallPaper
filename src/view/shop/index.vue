@@ -33,8 +33,7 @@ export default {
         "shopImages.pageIndex": {
             handler() {
                 this.getAllPictures();
-            },
-            deep: true
+            }
         }
     },
     methods: {
