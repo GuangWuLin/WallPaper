@@ -1,7 +1,7 @@
 import axios from '../utils/axios'
 
-const baseUrl = 'http://39.108.151.206:3000/company';
-
+// const baseUrl = 'http://39.108.151.206:3000/company';
+const baseUrl = 'http://182.61.33.203:3000/company';
 export  const request = {
     clientInfo:param => {
         return axios.get(`${baseUrl}/insertContact`,param)

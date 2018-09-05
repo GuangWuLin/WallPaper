@@ -15,6 +15,13 @@
             </router-link>
         </div>
         <div class="foot-bottom">
+            <!-- <a href=""> -->
+            <img src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif" style="width:20px;" alt="">
+            <!-- </a> -->
+            <!-- <a href=""> -->
+            <img src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" style="width:20px;" alt="">
+            <!-- </a> -->
+            <a href='http://www.miibeian.gov.cn' target="_blank">蜀ICP备17009466号</a>
             <span>地址：{{address}}</span>
             <span>联系电话：{{tel}}</span><br/>
             <span>{{copyRight}}</span>
