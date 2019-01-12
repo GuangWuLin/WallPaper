@@ -21,7 +21,7 @@
             <!-- <a href=""> -->
             <img src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" style="width:20px;" alt="">
             <!-- </a> -->
-            <a href='http://www.miibeian.gov.cn' target="_blank">蜀ICP备17009466号</a>
+            <a href='http://www.miibeian.gov.cn' target="_blank">蜀ICP备19001237号</a>
             <span>地址：{{address}}</span>
             <span>联系电话：{{tel}}</span><br/>
             <span>{{copyRight}}</span>
