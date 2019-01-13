@@ -4,7 +4,7 @@ import routes from './routes'
 export default () => {
   return new VueRouter({
     routes,
-    mode:'history',
+    mode:'hash',
     linkActiveClass: 'active-link',
     linkExactActiveClass: 'exact-active-link',
     // 保存上次页面滚动的位置
